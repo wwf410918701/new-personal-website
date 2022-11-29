@@ -110,9 +110,25 @@ const WORK_ERPERIENCE_CONTENT: WorkExperience[] = [
 ];
 
 const WorkExperience = () => (
-  <div className='w-full flex justify-center items-center flex-col'>
-    <h2 className='dark:text-white font-semibold'>Work Experience</h2>
-    <div className='md:w-224 p-10 w-100'>
+  <div className='flex flex-col items-center justify-center w-full'>
+    <div className='flex flex-col items-center justify-center'>
+      <svg
+        className='w-12 h-12 mb-2 text-cGreen'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+        ></path>
+      </svg>
+      <h2 className='font-semibold dark:text-white'>Work Experience</h2>
+    </div>
+    <div className='p-10 md:w-224 w-100'>
       <ol className='relative border-l border-gray-200 dark:border-gray-700'>
         {WORK_ERPERIENCE_CONTENT.map((content) => (
           <li className='mb-10 ml-4' key={content.companyName}>
@@ -123,7 +139,7 @@ const WorkExperience = () => (
             <h2 className='font-semibold text-gray-900 dark:text-white'>
               {content.companyName}
             </h2>
-            <p className='text-lg font-semibold text-gray-800 dark:text-gray-200 mb-5'>
+            <p className='mb-5 text-lg font-semibold text-gray-800 dark:text-gray-200'>
               {`${content.position}`}
             </p>
             {content.Des.map((d) => (
@@ -143,7 +159,7 @@ const WorkExperience = () => (
                       d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                     ></path>
                   </svg>
-                  <h3 className='text-gray-500 dark:text-gray-200 ml-2'>
+                  <h3 className='ml-2 text-gray-500 dark:text-gray-200'>
                     {d.workOutCome}
                   </h3>
                 </div>
@@ -158,11 +174,11 @@ const WorkExperience = () => (
                 {d.workOutComeLink && (
                   <a
                     onClick={() => window.open(d.workOutComeLink)}
-                    className='mb-5 cursor-pointer inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700'
+                    className='inline-flex items-center px-4 py-2 mb-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700'
                   >
                     View Website{" "}
                     <svg
-                      className='ml-2 w-3 h-3'
+                      className='w-3 h-3 ml-2'
                       fill='currentColor'
                       viewBox='0 0 20 20'
                       xmlns='http://www.w3.org/2000/svg'

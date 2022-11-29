@@ -1,6 +1,6 @@
-import CodingPng from "../../../public/images/index/CodingPng.png";
+import CodingPng from "../public/images/index/CodingPng.png";
 import Image from "next/image";
-import PersonalLinkedInIcon from "../../../components/PersonalLinkedIcon";
+import PersonalLinkedInIcon from "../components/PersonalLinkedIcon";
 
 const PersonalIntro = () => (
   <div className='w-full flex justify-center items-center'>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import ConfirmModal from "../../../components/ConfirmModal";
-import Input from "../../../components/Input";
-import TextArea from "../../../components/TextArea";
-import { storeEmployerMessage } from "../../../firebase/apis";
+import ConfirmModal from "../components/ConfirmModal";
+import Input from "../components/Input";
+import PersonalLinkedIcon from "../components/PersonalLinkedIcon";
+import TextArea from "../components/TextArea";
+import { storeEmployerMessage } from "../firebase/apis";
 import GoogleMap from "./GoogleMap";
 
 const HireMe = () => {
@@ -77,7 +78,7 @@ const HireMe = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col items-center justify-center mt-20'>
       <ConfirmModal
         type={"success"}
         message={"Successfully submit, I will get in touch with you soon."}
@@ -94,15 +95,35 @@ const HireMe = () => {
           setFailModalVisible(visible);
         }}
       />
-      <h2 className='dark:text-white font-semibold mt-20 md:mb-0 mb-10 '>
-        Hire Me
-      </h2>
-      <div className='flex md:flex-row gap-x-10 flex-col justify-center items-center'>
+      <div className='flex flex-col items-center justify-center'>
+        <svg
+          className='w-12 h-12 mb-2 text-cGreen'
+          fill='none'
+          stroke='currentColor'
+          viewBox='0 0 24 24'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='2'
+            d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z'
+          ></path>
+        </svg>
+        <h2 className='mb-5 font-semibold dark:text-white md:mb-0 '>Hire Me</h2>
+        <div className='flex flex-col items-center mb-10 sm:flex-row gap-x-3 md:mt-3'>
+          <p className='text-center dark:text-white/50'>
+            My base and contact details are as followed
+          </p>
+          <PersonalLinkedIcon />
+        </div>
+      </div>
+      <div className='flex flex-col items-center justify-center md:flex-row gap-x-10'>
         <div className='w-96 h-96 md:h-128'>
           <GoogleMap />
         </div>
-        <div className='md:mt-12 mt-5'>
-          <div className='mb-6  w-96 md:h-128 h-80 flex flex-col items-start gap-y-5'>
+        <div className='mt-5 md:mt-12'>
+          <div className='flex flex-col items-start mb-6 w-96 md:h-128 h-80 gap-y-5'>
             <Input
               onUpdate={function (inputString: string): void {
                 setTouched((preState) => ({

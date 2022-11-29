@@ -1,4 +1,4 @@
-import Paper from "../../../components/Paper";
+import Paper from "../components/Paper";
 
 type WorkmateFeedback = {
   paragraph: string;
@@ -25,17 +25,33 @@ const WORKMATEFEEDBACKS_CONTENT: WorkmateFeedback[] = [
 ];
 
 const FeedbacksFromWorkmates = () => (
-  <div className='flex flex-col justify-center items-center'>
-    <h2 className='dark:text-white font-semibold mb-10 mt-20'>
-      Feedbacks From My Colleagues
-    </h2>
-    <div className='flex md: w-full md:flex-row flex-col gap-x-5  justify-center items-center'>
+  <div className='flex flex-col items-center justify-center mt-20'>
+    <div className='flex flex-col items-center justify-center'>
+      <svg
+        className='w-12 h-12 mb-2 text-cGreen'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z'
+        ></path>
+      </svg>
+      <h2 className='mb-10 font-semibold dark:text-white'>
+        Feedbacks From My Colleagues
+      </h2>
+    </div>
+    <div className='flex flex-col items-center justify-center w-full md: md:flex-row gap-x-5'>
       {WORKMATEFEEDBACKS_CONTENT.map((content, index) => (
-        <div className='w-96 md: mb-5' key={`workmate_feedback-${index}`}>
+        <div className='mb-5 w-96 md:' key={`workmate_feedback-${index}`}>
           <Paper>
             <div className='flex flex-col items-end p-8 h-112 gap-y-2'>
               <p className='dark:text-white/80'>{content.paragraph}</p>
-              <div className='flex flex-row justify-center items-center'>
+              <div className='flex flex-row items-center justify-center'>
                 <p className='mr-2'>{content.name}</p>
                 {content.linkinUrl && (
                   <svg

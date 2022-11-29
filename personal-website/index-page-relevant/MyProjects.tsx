@@ -1,7 +1,7 @@
-import ImageBoxWithDescription from "../../../components/ImageBoxWithDescription";
-import BlogScreenShotPic from "../../../public/images/index/blogScreenshot.png";
-import EcommercePic from "../../../public/images/index/ecommerce-screenshot.png";
-import SparkWebsitePic from "../../../public/images/index/SparkWebsiteScreenshot.png";
+import ImageBoxWithDescription from "../components/ImageBoxWithDescription";
+import BlogScreenShotPic from "../public/images/index/blogScreenshot.png";
+import EcommercePic from "../public/images/index/ecommerce-screenshot.png";
+import SparkWebsitePic from "../public/images/index/SparkWebsiteScreenshot.png";
 
 const EcommerceDesParagraph =
   "An online shop which contains most frequently-used features like login, items display, shopping cart, payment.";
@@ -38,18 +38,34 @@ const MY_PROJECT_CONTENT = [
 ];
 
 const MyProjects = () => (
-  <div className='flex flex-col justify-center items-center'>
-    <h2 className='dark:text-white font-semibold mb-10'>My Projects</h2>
+  <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center'>
+      <svg
+        className='w-12 h-12 mb-2 text-cGreen'
+        fill='none'
+        stroke='currentColor'
+        viewBox='0 0 24 24'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7'
+        ></path>
+      </svg>
+      <h2 className='mb-10 font-semibold dark:text-white'>My Projects</h2>
+    </div>
     <div>
       {MY_PROJECT_CONTENT.map((content, index) => (
         <div
           key={`project-${index}`}
-          className='flex md:flex-row flex-col md:last:mb-0 mb-10 w-full items-center'
+          className='flex flex-col items-center w-full mb-10 md:flex-row md:last:mb-0'
         >
           {content.map((c) => (
             <div
               key={c.des[0]}
-              className='w-100 h-60 md:mr-10 md:mb-0 mb-10 last:mb-0 last:mr-0 md:pl-0 md:pr-0 pl-2 pr-2 '
+              className='pl-2 pr-2 mb-10 w-100 h-60 md:mr-10 md:mb-0 last:mb-0 last:mr-0 md:pl-0 md:pr-0 '
             >
               <ImageBoxWithDescription
                 title={c.des[0]}

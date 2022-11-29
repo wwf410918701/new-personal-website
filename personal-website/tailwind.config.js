@@ -4,7 +4,7 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js",
     "./pages/**/*.{ts,tsx}",
     './components/**/*.{ts,tsx}',
-    './pages-relevant/**/*.{ts,tsx}',
+    './index-page-relevant/**/*.{ts,tsx}',
     "./public/**/*.html",
   ],
   theme: {
@@ -13,6 +13,8 @@ module.exports = {
       cPurple: '#52489c',
       cLightPurple: '#9f9ac4',
       cLightestPurple: '#b5b2cc',
+      cLightGreen: '#84a98c',
+      cGreen: '#618B6A',
     },
     extend: {
       spacing: {
@@ -21,6 +23,8 @@ module.exports = {
         '224': '54rem',
         '160': '40rem',
         '100': '25rem',
+        '260': '65rem',
+        '144': '36rem'
       }
     },
   },
