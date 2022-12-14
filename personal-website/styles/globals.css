@@ -21,3 +21,19 @@ a{
 
 @tailwind components;
 @tailwind utilities;
+
+
+.w-e-text-container, .w-e-bar {
+  --w-e-textarea-bg-color: #272727;
+  --w-e-textarea-color: #fff;
+
+  --w-e-toolbar-color: #fff;
+  --w-e-toolbar-bg-color: #272727;
+  --w-e-toolbar-active-color: rgb(131, 125, 125);
+  --w-e-toolbar-active-bg-color: #b8b4b4;
+  --w-e-toolbar-disabled-color: rgb(124, 123, 123);
+  --w-e-toolbar-border-color: #e8e8e8;
+  --w-e-textarea-slight-bg-color: rgb(75, 75, 78);
+  --w-e-textarea-slight-border-color: #706d6d;
+
+}

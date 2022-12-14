@@ -15,6 +15,7 @@ module.exports = {
       cLightestPurple: '#b5b2cc',
       cLightGreen: '#84a98c',
       cGreen: '#618B6A',
+      cLightGreen: '#82b78d',
     },
     extend: {
       spacing: {

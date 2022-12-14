@@ -1,10 +1,10 @@
 import Carousel from "../../components/Carsouel";
 import Header from "../../components/Header";
-import { fetchAllPostsSummaries } from "../../firebase/apis";
+import { fetchAllPostsSummaries } from "../../firebase/blogApis";
 import { Summary } from "../../firebase/type";
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
-
+import defaultBlogPoster from "../../public/images/blog/default-blog-poster.png";
 interface IBlogs {
   summaries: Summary[];
 }
@@ -31,7 +31,11 @@ const Blogs = ({ summaries }: IBlogs) => {
           {summaries.map((summary) => (
             <Card
               key={summary.id}
-              posterUrl={summary.posterImgUrl}
+              posterUrl={
+                summary?.posterImgUrl === ""
+                  ? defaultBlogPoster
+                  : summary?.posterImgUrl
+              }
               title={summary.title}
               des={summary.summary}
               linkPageUrl={summary.id}

@@ -41,11 +41,11 @@ const Carousel = ({ images }: ICarsouelWrapper) => {
               src={image.src}
               className='absolute block object-contain w-full -translate-x-1/2 -translate-y-1/2 rounded-lg cursor-pointer top-1/2 left-1/2'
               alt={image.title}
-              // onClick={() => window.open(image.linkPage)}
+              onClick={() => window.open(`blog/${image.linkPage}`)}
             />
             <div
-              className='absolute flex items-center justify-center p-10 bg-gray-500 cursor-pointer bg-opacity-90 min-h-36 md:w-128 w-72'
-              // onClick={() => window.open(image.linkPage)}
+              className='absolute flex items-center justify-center p-10 bg-gray-500 cursor-pointer rounded-2xl bg-opacity-90 min-h-36 md:w-128 w-72'
+              onClick={() => window.open(`blog/${image.linkPage}`)}
             >
               <span className={`md:text-5xl text-2xl text-white text-center`}>
                 {image.title}
