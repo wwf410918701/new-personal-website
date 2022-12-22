@@ -109,8 +109,6 @@ const handler = async (req, res) => {
     res.status(405).send({ message: 'Only POST requests allowed' })
     return
   }
-  console.log('create-blog')
-  console.log(req.body)
   const {title, summary, paragraph, author, posterFile, posterFileName, userID} = req.body
 
   if(posterFile) {

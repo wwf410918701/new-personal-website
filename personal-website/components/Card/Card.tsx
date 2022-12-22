@@ -11,7 +11,7 @@ const Card = ({ posterUrl, title, des, linkPageUrl }: ICard) => (
   <a
     href={`blog/${linkPageUrl}`}
     // target='_blank'
-    className='flex flex-col items-center m-5 bg-white border rounded-lg shadow-md sm:m-0 sm:w-112 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:w-144 md:flex-row xl:h-48 xl:w-260'
+    className='z-10 flex flex-col items-center m-5 bg-white border rounded-lg shadow-md opacity-80 sm:m-0 sm:w-112 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:w-144 md:flex-row xl:h-48 xl:w-260'
   >
     <Image
       className='object-cover w-full rounded-t-lg h-96 md:h-full md:w-48 md:rounded-none md:rounded-l-lg'

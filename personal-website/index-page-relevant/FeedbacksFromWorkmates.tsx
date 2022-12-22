@@ -25,8 +25,8 @@ const WORKMATEFEEDBACKS_CONTENT: WorkmateFeedback[] = [
 ];
 
 const FeedbacksFromWorkmates = () => (
-  <div className='flex flex-col items-center justify-center mt-20'>
-    <div className='flex flex-col items-center justify-center'>
+  <div className='z-10 flex flex-col items-center justify-center mt-20'>
+    <div className='z-10 flex flex-col items-center justify-center'>
       <svg
         className='w-12 h-12 mb-2 text-cGreen'
         fill='none'
@@ -47,7 +47,7 @@ const FeedbacksFromWorkmates = () => (
     </div>
     <div className='flex flex-col items-center justify-center w-full md: md:flex-row gap-x-5'>
       {WORKMATEFEEDBACKS_CONTENT.map((content, index) => (
-        <div className='mb-5 w-96 md:' key={`workmate_feedback-${index}`}>
+        <div className='z-10 mb-5 w-96' key={`workmate_feedback-${index}`}>
           <Paper>
             <div className='flex flex-col items-end p-8 h-112 gap-y-2'>
               <p className='dark:text-white/80'>{content.paragraph}</p>

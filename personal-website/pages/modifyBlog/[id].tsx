@@ -1,19 +1,16 @@
+import { IDomEditor } from "@wangeditor/editor";
+import { Router, useRouter } from "next/router";
+import { useContext, useEffect, useRef, useState } from "react";
+import FileUpload from "../../components/FileUpload";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-const TextEditor = dynamic(
-  () => import("../../components/TextEditor/TextEditor"),
-  { ssr: false }
-);
-import { IDomEditor } from "@wangeditor/editor";
-import dynamic from "next/dynamic";
-import { useContext, useRef, useState } from "react";
 import Input from "../../components/Input";
 import LoadingButton from "../../components/LoadingButton";
-import { UploadingStatus } from "../../firebase/type";
-import FileUpload from "../../components/FileUpload";
+import TextEditor from "../../components/TextEditor/TextEditor";
+import { fetchPost, fetchPostSummary } from "../../firebase/blogApis";
+import { updatePost, uploadImg } from "../../firebase/blogApisWithoutType";
+import { Blog, UploadingStatus } from "../../firebase/type";
 import { RootStoreContext } from "../_app";
-import Router from "next/router";
-import { uploadImg, storePost } from "../../firebase/blogApisWithoutType";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 
@@ -40,12 +37,13 @@ const paragraphInputHasError = (paragraph: string) => {
 
 const POSETER_TYPES = ["png", "jpg", "svg"];
 
-const WriteBlogPage = () => {
+const ModifyBlog = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [paragraph, setParagraph] = useState("<p>Enjoying writing!</p>");
   const [posterName, setPosterName] = useState<string>("");
   const [posterFile, setPosterFile] = useState<File | null>(null);
+  const [posterUrl, setPosterUrl] = useState<string | null>(null);
   const [posterHasError, setPosterHasError] = useState(false);
   const editorRef = useRef<IDomEditor | null>(null);
   const allUploadedImages = useRef<string[]>([]);
@@ -56,15 +54,36 @@ const WriteBlogPage = () => {
   });
   const [submitStatus, setSubmitStatus] = useState<UploadingStatus>("default");
   const { userStore } = useContext(RootStoreContext);
+  const router = useRouter();
+  const { id } = router.query;
 
-  const updateAllUploadedImages = (newAllUploadedImages: string[]) => {
-    allUploadedImages.current = [
-      ...allUploadedImages.current,
-      ...newAllUploadedImages,
-    ];
-  };
+  useEffect(() => {
+    if (id) {
+      fetchPost(id as string)
+        .then((blog) => {
+          if (blog) {
+            setTitle(blog.title);
+            setParagraph(blog.content);
+          }
+        })
+        .then(() => {
+          fetchPostSummary(parseInt(id as string)).then((blogSummary) => {
+            if (blogSummary) {
+              setSummary(blogSummary.summary);
+              setPosterUrl(blogSummary.posterImgUrl);
+            }
+          });
+        })
+        .catch((e) => {
+          console.log(
+            "Errors when fetching blog data, please try again later."
+          );
+          console.log(e);
+        });
+    }
+  }, []);
 
-  const handleBlogPost = () => {
+  const handleBlogModification = () => {
     setHasTouched({
       title: true,
       summary: true,
@@ -82,7 +101,8 @@ const WriteBlogPage = () => {
     if (posterFile) {
       uploadImg(posterName, posterFile)
         .then(async (posterImgUrl) => {
-          await storePost(
+          await updatePost(
+            id,
             title,
             summary,
             paragraph,
@@ -93,7 +113,7 @@ const WriteBlogPage = () => {
         })
         .then(() => {
           setSubmitStatus("success");
-          Router.push("/blogs");
+          router.push("/blogs");
         })
         .catch((e) => {
           console.log("Error when submitting new blog");
@@ -101,7 +121,7 @@ const WriteBlogPage = () => {
           setSubmitStatus("failure");
         });
     } else {
-      storePost(
+      updatePost(
         title,
         summary,
         paragraph,
@@ -111,7 +131,7 @@ const WriteBlogPage = () => {
       )
         .then(() => {
           setSubmitStatus("success");
-          Router.push("/blogs");
+          router.push("/blogs");
         })
         .catch((e) => {
           console.log("Error when submitting new blog");
@@ -119,6 +139,13 @@ const WriteBlogPage = () => {
           setSubmitStatus("failure");
         });
     }
+  };
+
+  const updateAllUploadedImages = (newAllUploadedImages: string[]) => {
+    allUploadedImages.current = [
+      ...allUploadedImages.current,
+      ...newAllUploadedImages,
+    ];
   };
 
   return (
@@ -130,8 +157,8 @@ const WriteBlogPage = () => {
         className='fixed top-0 z-0 h-screen'
       />
       <div className='z-10 flex flex-col items-center justify-center w-full min-h-screen pt-36'>
-        <div className='z-10 flex flex-col md:w-260 w-96 '>
-          <div className='z-10 mb-10 '>
+        <div className='z-10 flex flex-col md:w-260 w-96'>
+          <div className='z-10 mb-10'>
             <h2 className='mb-5 text-white'>Title</h2>
             <Input
               onUpdate={function (inputString: string): void {
@@ -145,10 +172,11 @@ const WriteBlogPage = () => {
               type={"text"}
               id={"title"}
               required={true}
+              value={title}
               isError={hasTouched.title && titleInputHasError(title)}
             />
           </div>
-          <div className='z-10 mb-10 '>
+          <div className='z-10 mb-10'>
             <h2 className='mb-5 text-white'>Summary</h2>
             <Input
               onUpdate={function (inputString: string): void {
@@ -163,9 +191,10 @@ const WriteBlogPage = () => {
               id={"summary"}
               required={true}
               isError={hasTouched.summary && summaryInputHasError(summary)}
+              value={summary}
             />
           </div>
-          <div className={`mb-10  z-10 `}>
+          <div className={`mb-10 `}>
             <h2
               className={`mb-5 text-white ${
                 posterHasError ? "!text-red-500" : ""
@@ -173,28 +202,54 @@ const WriteBlogPage = () => {
             >
               Poster
             </h2>
-            <FileUpload
-              updateFileName={function (fileName: string): void {
-                if (POSETER_TYPES.includes(fileName.split(".")[1])) {
-                  setPosterHasError(false);
-                  setPosterName(fileName);
-                } else {
-                  setPosterHasError(true);
-                }
-              }}
-              updateFile={function (file: File): void {
-                setPosterFile(file);
-              }}
-              hasError={posterHasError}
-            />
+            {posterUrl ? (
+              <div className='flex flex-col items-center md:flex-row'>
+                <img src={posterUrl} alt='blog-poster' className='max-w-sm' />
+                <button
+                  className='mt-5 md:ml-5'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPosterUrl(null);
+                  }}
+                >
+                  <svg
+                    className='w-6 h-6 text-red-500 hover:text-red-400'
+                    fill='currentColor'
+                    viewBox='0 0 20 20'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z'
+                      clipRule='evenodd'
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <FileUpload
+                updateFileName={function (fileName: string): void {
+                  if (POSETER_TYPES.includes(fileName.split(".")[1])) {
+                    setPosterHasError(false);
+                    setPosterName(fileName);
+                  } else {
+                    setPosterHasError(true);
+                  }
+                }}
+                updateFile={function (file: File): void {
+                  setPosterFile(file);
+                }}
+                hasError={posterHasError}
+              />
+            )}
           </div>
-          <h2 className='z-10 mb-5 text-white '>Content</h2>
+          <h2 className='mb-5 text-white'>Content</h2>
           <div
             className={`${
               hasTouched.paragraph && paragraphInputHasError(paragraph)
                 ? "border-2 border-red-500 border-solid"
                 : ""
-            }  z-10 `}
+            }`}
           >
             <TextEditor
               placeholder={paragraph}
@@ -208,10 +263,10 @@ const WriteBlogPage = () => {
               }
             />
           </div>
-          <div className='z-10 flex flex-row items-center justify-center mt-10 '>
+          <div className='flex flex-row items-center justify-center mt-10'>
             <LoadingButton
               isLoading={submitStatus === "loading"}
-              handleCallBack={handleBlogPost}
+              handleCallBack={handleBlogModification}
             >
               DONE
             </LoadingButton>
@@ -229,4 +284,4 @@ const WriteBlogPage = () => {
   );
 };
 
-export default WriteBlogPage;
+export default ModifyBlog;

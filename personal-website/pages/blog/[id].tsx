@@ -4,7 +4,8 @@ import Paper from "../../components/Paper";
 import { fetchAllPostsSummaries, fetchPost } from "../../firebase/blogApis";
 import { Blog } from "../../firebase/type";
 import CommentCard from "./components/CommentCard";
-
+import backgroundImg from "../../public/images/public/background-img.jpg";
+import Image from "next/image";
 interface IBlog {
   blog: Blog | null;
 }
@@ -12,24 +13,31 @@ interface IBlog {
 const Blog = ({ blog }: IBlog) => (
   <div className='dark dark:bg-gray-900'>
     <Header />
-    <div className='flex flex-col items-center justify-center w-full pt-36 gap-y-10 dark:text-white'>
-      <div className='flex flex-col items-center justify-center p-5 bg-gray-800 sm:p-20 rounded-xl gap-y-10'>
+    <Image
+      src={backgroundImg}
+      alt='flowerImg-background'
+      className='fixed top-0 z-0 h-screen'
+    />
+    <div className='z-10 flex flex-col items-center justify-center w-full pt-36 gap-y-10 dark:text-white'>
+      <div className='z-10 flex flex-col items-center justify-between min-h-screen p-5 bg-gray-800 opacity-80 sm:p-20 rounded-xl gap-y-10'>
         {blog ? (
           <>
-            <h1 className='text-center'>{blog?.title}</h1>
-            <div className='flex flex-row justify-between w-80'>
-              <p>
-                BY:
-                <span className='pl-1 text-blue-400'>{`${
-                  blog.author ?? "No Data"
-                }`}</span>
-              </p>
-              <p>
-                Create At:{" "}
-                <span className='pl-1 text-blue-400'>{`${
-                  blog.createdAt ?? "No Data"
-                }`}</span>
-              </p>
+            <div className='flex flex-col items-center justify-center gap-y-5'>
+              <h1 className='text-center'>{blog?.title}</h1>
+              <div className='flex flex-row justify-between w-80'>
+                <p>
+                  BY:
+                  <span className='pl-1 text-blue-400'>{`${
+                    blog.author ?? "No Data"
+                  }`}</span>
+                </p>
+                <p>
+                  Create At:{" "}
+                  <span className='pl-1 text-blue-400'>{`${
+                    blog.time ?? "No Data"
+                  }`}</span>
+                </p>
+              </div>
             </div>
             <div
               className='break-all overflow-clip sm:w-112 md:w-224 w-80'

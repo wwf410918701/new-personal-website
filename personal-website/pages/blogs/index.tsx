@@ -5,6 +5,8 @@ import { Summary } from "../../firebase/type";
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 import defaultBlogPoster from "../../public/images/blog/default-blog-poster.png";
+import backgroundImg from "../../public/images/public/background-img.jpg";
+import Image from "next/image";
 interface IBlogs {
   summaries: Summary[];
 }
@@ -13,6 +15,11 @@ const Blogs = ({ summaries }: IBlogs) => {
   return (
     <div className='dark dark:bg-gray-900'>
       <Header />
+      <Image
+        src={backgroundImg}
+        alt='flowerImg-background'
+        className='fixed top-0 z-0 h-screen'
+      />
       <div className='pt-24'>
         {summaries.length > 0 && (
           <div className='flex items-center justify-center'>

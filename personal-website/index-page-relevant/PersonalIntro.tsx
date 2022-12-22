@@ -3,16 +3,16 @@ import Image from "next/image";
 import PersonalLinkedInIcon from "../components/PersonalLinkedIcon";
 
 const PersonalIntro = () => (
-  <div className='w-full flex justify-center items-center'>
-    <div className='flex flex-col md:flex-row items-center md:p-20'>
-      <div className='md:w-128 w-80 md:mt-0 md:text-left flex flex-col text-center items-start mr-10 mt-10'>
-        <h1 className='dark:text-white'>
+  <div className='flex items-center justify-center w-full'>
+    <div className='flex flex-col items-center md:flex-row md:p-20'>
+      <div className='z-10 flex flex-col items-start mt-10 text-center md:mr-10 md:w-128 w-80 md:mt-0 md:text-left'>
+        <h1 className='z-10 dark:text-white'>
           Hi, I'm Jimmy, a frontend developer.
-          <span className='ml-2'>
+          <span className='ml-2 '>
             <PersonalLinkedInIcon />
           </span>
         </h1>
-        <h2 className='dark: text-gray-200'>
+        <h2 className='text-gray-200 dark:'>
           I have one and a half year experience in frontend development and
           looking for full time opportunity of June next year after my
           graduation.
@@ -43,7 +43,7 @@ const PersonalIntro = () => (
       </div>
       <Image
         src={CodingPng}
-        className='md:w-96 md:h-96 w-80 h-80'
+        className='z-10 md:w-96 md:h-96 w-80 h-80'
         alt='W slogon'
       />
     </div>

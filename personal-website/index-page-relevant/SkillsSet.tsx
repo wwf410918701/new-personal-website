@@ -12,8 +12,8 @@ const SKILLSSET_CONTENT = [
 ];
 
 const SkillsSet = () => (
-  <div className='flex flex-col items-center justify-center w-full mt-20'>
-    <div className='flex flex-col items-center justify-center'>
+  <div className='z-10 flex flex-col items-center justify-center w-full mt-20'>
+    <div className='z-10 flex flex-col items-center justify-center'>
       <svg
         className='w-12 h-12 mb-2 text-cGreen'
         fill='none'
@@ -33,7 +33,7 @@ const SkillsSet = () => (
     {SKILLSSET_CONTENT.map((content, index) => (
       <div
         key={`skillset_grid-${index}`}
-        className='flex justify-center w-full mb-5 last:mb-0'
+        className='z-10 flex justify-center w-full mb-5 last:mb-0'
       >
         <div className='flex flex-col md:flex-row'>
           <div className='mb-5 w-96 md:mr-5 md:mb-0'>

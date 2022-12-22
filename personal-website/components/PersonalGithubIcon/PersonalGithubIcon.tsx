@@ -1,9 +1,13 @@
 const PersonalGithubIcon = () => (
-  <a href='https://github.com/wwf410918701?tab=repositories' target='_blank'>
+  <a
+    href='https://github.com/wwf410918701?tab=repositories'
+    target='_blank'
+    className='z-10'
+  >
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 496 512'
-      className='w-5 h-5 cursor-pointer inline-block '
+      className='inline-block w-5 h-5 cursor-pointer '
     >
       <path
         fill='currentColor'

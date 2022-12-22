@@ -6,6 +6,8 @@ import Paper from "../../components/Paper";
 import { RootStoreContext } from "../_app";
 import Router from "next/router";
 import ConfirmModal from "../../components/ConfirmModal";
+import backgroundImg from "../../public/images/public/background-img.jpg";
+import Image from "next/image";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -82,22 +84,30 @@ const SignUp = () => {
   return (
     <div className='dark dark:bg-gray-900'>
       <Header />
+      <Image
+        src={backgroundImg}
+        alt='flowerImg-background'
+        className='fixed top-0 z-0 h-screen'
+      />
       <ConfirmModal
         type={"success"}
         message={
           "Successfully create your account! Please login in the login page."
         }
         visible={successModalVisble}
-        onUpdateVisible={function (visible: boolean): void {
+        onConfirm={function (visible: boolean): void {
           setSuccessModalVisible(visible);
           Router.push("/login");
         }}
+        onCancel={function (visible: boolean): void {
+          setSuccessModalVisible(visible);
+        }}
       />
       <div className='flex items-center justify-center w-full h-screen'>
-        <div className='flex items-center justify-center w-128'>
+        <div className='z-10 flex items-center justify-center md:w-128 w-96 opacity-90'>
           <Paper>
             <div className='flex items-center justify-center w-full pt-10 pb-10'>
-              <form className='flex flex-col justify-center w-96'>
+              <form className='flex flex-col justify-center md:w-96 w-80'>
                 <div className='mb-6'>
                   <label
                     htmlFor='userName'

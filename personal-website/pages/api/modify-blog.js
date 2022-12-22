@@ -1,12 +1,12 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { firestore, storage } from './config'
-import moment from "moment";
+
+const storage = getStorage();
 
 const metadata = {
   contentType: 'image/jpeg'
 };
 
-export const uploadImg = (filename, file) => {
+const uploadImg = (filename, file) => {
   // Upload file and metadata to the object 'images/mountains.jpg'
   const storageRef = ref(storage, 'images/' + filename);
   const uploadTask = uploadBytesResumable(storageRef, file, metadata);
@@ -60,20 +60,8 @@ export const uploadImg = (filename, file) => {
   })
 }
 
-export const addBlogToUserAccount = (userID, blogID) => {
-  const userAccountRef = firestore.doc(`users/${userID}`)
-  
-  return userAccountRef.get().then(data => data.data()['blogs'])
-    .then(preBlogs => [...preBlogs, blogID])
-    .then(updatedBlogs => userAccountRef.update('blogs', updatedBlogs))
-    .catch(e => {
-      console.log('Error when trying to save the post to your account.')
-      console.log(e);
-    })
-} 
-
 export const updatePost = async(postID, title, summary, paragraph, author, posterImgUrl, userID) => {
-  const createAt = moment().format("DD/MM/YYYY") 
+  const createAt = new Date()
   const postAbstractRef = firestore.doc(`postsAbstract/${postID}`)
   const postRef = firestore.doc(`posts/${postID}`)
   const blogComments = await (await postRef.get()).data()['comments']
@@ -95,9 +83,7 @@ export const updatePost = async(postID, title, summary, paragraph, author, poste
           id: postID,
           title,
           content: paragraph,
-          comments: blogComments,
-          time: createAt,
-          author,
+          comments: blogComments
       }
     )
   })
@@ -110,68 +96,28 @@ export const updatePost = async(postID, title, summary, paragraph, author, poste
   return true
 }
 
-export const storePost = async(title, summary, paragraph, author, posterImgUrl, userID) => {
-  const createAt = moment().format("DD/MM/YYYY") 
-  const postsSummariesCollectionRef = firestore.collection(`postsAbstract/`)
-  
-  postsSummariesCollectionRef.orderBy('id', 'desc').limit(1).get()
-    .then(lastData => {
-      return lastData.docs[0].data().id
-    })
-    .then(async (lastId) => {
-      const postAbstractRef = firestore.doc(`postsAbstract/${lastId+1}`)
-      await postAbstractRef.set(
-        {
-          id: lastId + 1,
-          title,
-          summary,
-          time: createAt,
-          author,
-          posterImgUrl,
+const handler = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).send({ message: 'Only POST requests allowed' })
+    return
+  }
+
+  const {postID, title, summary, paragraph, author, posterFile, posterFileName, userID} = req.body
+
+  if(posterFile) {
+    uploadImg(posterFileName, posterFile)
+    .then(async (posterImgUrl) => {
+      const isSuccess = await updatePost(postID, title, summary, paragraph, author, posterImgUrl, userID)
+
+      if(isSuccess) {
+        res.status(200).send({message: 'Successfully create a new blog'})
+      } else {
+        console.log('Error when creating user')
+        res.status(500).send({ message: 'Fail to create new blog' })
+        return
         }
-      )
-      .then(async() => {
-        const postRef = firestore.doc(`posts/${lastId+1}`)
-        await postRef.set(
-          {
-              id: lastId + 1,
-              title,
-              content: paragraph,
-              comments: [],
-              time: createAt,
-              author,
-          }
-        )
-      })
-      .then(async () => {
-        await addBlogToUserAccount(userID, (lastId + 1))
-      })
     })
-  .catch((e) => {
-    // TODO:发生失败时数据库两个均需回退，也即删除已创建的某一部分数据
-    console.log('Error when saving post to firebase=>')
-    console.log(e)
-    return false
-  })
-  return true
+  }
 }
 
-export const deletePost = (postID, userID) => {
-  const postRef = firestore.doc(`posts/${postID}`)
-  const postAbstractRef = firestore.doc(`postsAbstract/${postID}`)
-
-  return postRef.delete()
-  .then(() => {
-    postAbstractRef.delete()
-    .then(() => deletePostBelongingOnUserAccount(postID, userID))
-  })
-}
-
-const deletePostBelongingOnUserAccount = (postID, userID) => {
-  const userRef = firestore.doc(`users/${userID}`)
-
-  userRef.get()
-  .then(res => res.data()['blogs'])
-  .then(userBlogs => userBlogs.filter(userBlog => userBlog !== postID))
-  .then(updatedUserBlog => userRef.update('blogs', updatedUserBlog))
-}
+export default handler

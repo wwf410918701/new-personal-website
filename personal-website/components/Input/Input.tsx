@@ -5,6 +5,7 @@ interface IInput {
   id: string;
   required: boolean;
   isError: boolean;
+  value?: string;
 }
 
 const Input = ({
@@ -14,6 +15,7 @@ const Input = ({
   id,
   required,
   isError,
+  value,
 }: IInput) => (
   <input
     type={type}
@@ -28,6 +30,7 @@ const Input = ({
     } bg-gray-50 border  text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 `}
     placeholder={placeHolder}
     required={required}
+    value={value}
   />
 );
 

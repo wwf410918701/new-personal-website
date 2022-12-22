@@ -143,5 +143,7 @@ export const uploadBlogsImgs = (
 export const fetchPostSummary = (id: number) => {
   const postSummaryRef = firestore.doc(`postsAbstract/${id}`);
 
-  return postSummaryRef.get().then((postdoc) => postdoc.data());
+  return postSummaryRef
+    .get()
+    .then((postdoc) => postdoc.data() as Summary | null);
 };

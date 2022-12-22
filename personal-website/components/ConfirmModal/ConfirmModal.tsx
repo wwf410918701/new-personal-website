@@ -2,7 +2,8 @@ interface IConfirmModal {
   type: "success" | "error";
   message: string;
   visible: boolean;
-  onUpdateVisible: (visible: boolean) => void;
+  onConfirm: (visible: boolean) => void;
+  onCancel: (visible: boolean) => void;
 }
 
 const getStyles = (type: "success" | "error") => {
@@ -17,7 +18,8 @@ const ConfirmModal = ({
   message,
   type,
   visible,
-  onUpdateVisible,
+  onConfirm,
+  onCancel,
 }: IConfirmModal) => (
   <div
     id='popup-modal'
@@ -26,13 +28,13 @@ const ConfirmModal = ({
       visible ? "" : "hidden"
     } 'overflow-y-auto overflow-x-hidden bg-gray-400 bg-opacity-50 fixed flex justify-center items-center h-full  top-0 right-0 left-0 z-50 p-4 md:inset-0  md:h-full'`}
   >
-    <div className='relative w-full max-w-md h-full md:h-auto'>
+    <div className='relative w-full h-full max-w-md md:h-auto'>
       <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
         <button
           type='button'
           className='absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white'
           data-modal-toggle='popup-modal'
-          onClick={() => onUpdateVisible(false)}
+          onClick={() => onCancel(false)}
         >
           <svg
             aria-hidden='true'
@@ -49,7 +51,7 @@ const ConfirmModal = ({
           </svg>
           <span className='sr-only'>Close modal</span>
         </button>
-        <div className='p-6 text-center pt-10'>
+        <div className='p-6 pt-10 text-center'>
           <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-white'>
             {message}
           </h3>
@@ -59,7 +61,7 @@ const ConfirmModal = ({
             className={`${getStyles(
               type
             )}'text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2'`}
-            onClick={() => onUpdateVisible(false)}
+            onClick={() => onConfirm(false)}
           >
             Confirm
           </button>

@@ -83,7 +83,10 @@ const HireMe = () => {
         type={"success"}
         message={"Successfully submit, I will get in touch with you soon."}
         visible={successModalVisible}
-        onUpdateVisible={function (visible: boolean): void {
+        onConfirm={function (visible: boolean): void {
+          setSuccessModalVisible(visible);
+        }}
+        onCancel={function (visible: boolean): void {
           setSuccessModalVisible(visible);
         }}
       />
@@ -91,11 +94,14 @@ const HireMe = () => {
         type={"error"}
         message={"Opps, some errors happen, please try again later."}
         visible={failModalVisible}
-        onUpdateVisible={function (visible: boolean): void {
+        onConfirm={function (visible: boolean): void {
           setFailModalVisible(visible);
         }}
+        onCancel={function (visible: boolean): void {
+          setSuccessModalVisible(visible);
+        }}
       />
-      <div className='flex flex-col items-center justify-center'>
+      <div className='z-10 flex flex-col items-center justify-center'>
         <svg
           className='w-12 h-12 mb-2 text-cGreen'
           fill='none'
@@ -118,7 +124,7 @@ const HireMe = () => {
           <PersonalLinkedIcon />
         </div>
       </div>
-      <div className='flex flex-col items-center justify-center md:flex-row gap-x-10'>
+      <div className='z-10 flex flex-col items-center justify-center md:flex-row gap-x-10'>
         <div className='w-96 h-96 md:h-128'>
           <GoogleMap />
         </div>

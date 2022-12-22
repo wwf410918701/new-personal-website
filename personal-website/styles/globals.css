@@ -37,3 +37,13 @@ a{
   --w-e-textarea-slight-border-color: #706d6d;
 
 }
+
+.fadeIn-animation-preLoad {
+  opacity: 0%;
+  visibility: hidden;
+}
+
+.fadeIn-animation-loaded {
+  opacity: 88%;
+  visibility: null;
+}
