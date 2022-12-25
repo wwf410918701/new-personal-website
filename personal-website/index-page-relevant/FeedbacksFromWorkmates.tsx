@@ -25,7 +25,7 @@ const WORKMATEFEEDBACKS_CONTENT: WorkmateFeedback[] = [
 ];
 
 const FeedbacksFromWorkmates = () => (
-  <div className='z-10 flex flex-col items-center justify-center mt-20'>
+  <div className='z-10 flex flex-col items-center justify-center'>
     <div className='z-10 flex flex-col items-center justify-center'>
       <svg
         className='w-12 h-12 mb-2 text-cGreen'

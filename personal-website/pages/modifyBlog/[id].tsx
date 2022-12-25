@@ -13,6 +13,7 @@ import { Blog, UploadingStatus } from "../../firebase/type";
 import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
+import Head from "next/head";
 
 const summaryInputHasError = (Summary: string) => {
   if (Summary.trim().length === 0) {
@@ -150,6 +151,10 @@ const ModifyBlog = () => {
 
   return (
     <div className='dark dark:bg-gray-900'>
+      <Head>
+        <link rel='icon' href='/images/public/websiteSlogan.webp' />
+        <title>{`Modify blog ${title}`}</title>
+      </Head>
       <Header />
       <Image
         src={backgroundImg}

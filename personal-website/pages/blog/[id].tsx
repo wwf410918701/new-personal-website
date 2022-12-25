@@ -6,12 +6,17 @@ import { Blog } from "../../firebase/type";
 import CommentCard from "./components/CommentCard";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
+import Head from "next/head";
 interface IBlog {
   blog: Blog | null;
 }
 
 const Blog = ({ blog }: IBlog) => (
   <div className='dark dark:bg-gray-900'>
+    <Head>
+      <title>{blog?.title ?? "blog"}</title>
+      <link rel='icon' href='/images/public/websiteSlogan.webp' />
+    </Head>
     <Header />
     <Image
       src={backgroundImg}
@@ -19,7 +24,7 @@ const Blog = ({ blog }: IBlog) => (
       className='fixed top-0 z-0 h-screen'
     />
     <div className='z-10 flex flex-col items-center justify-center w-full pt-36 gap-y-10 dark:text-white'>
-      <div className='z-10 flex flex-col items-center justify-between min-h-screen p-5 bg-gray-800 opacity-80 sm:p-20 rounded-xl gap-y-10'>
+      <div className='z-10 flex flex-col items-center justify-between min-h-screen p-0 pt-10 pb-10 bg-gray-800 opacity-80 sm:p-20 rounded-xl gap-y-10'>
         {blog ? (
           <>
             <div className='flex flex-col items-center justify-center gap-y-5'>

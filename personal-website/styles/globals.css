@@ -41,9 +41,22 @@ a{
 .fadeIn-animation-preLoad {
   opacity: 0%;
   visibility: hidden;
+  transition: linear 0.3s;
+  transform: scale(0.95);
 }
 
 .fadeIn-animation-loaded {
   opacity: 88%;
   visibility: null;
+  transition: linear 0.3s;
+}
+
+.fadeIn-animation-preLoad {
+  margin-top: -100px;
+  transition: linear 0.3s;
+}
+
+.fadeIn-animation-loaded {
+  transition: linear 0.3s;
+  margin-top: 0px;
 }

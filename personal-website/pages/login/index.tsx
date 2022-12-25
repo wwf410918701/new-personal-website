@@ -10,6 +10,7 @@ import Router from "next/router";
 import { LoginResData } from "../../mobx/helper";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
+import Head from "next/head";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -84,6 +85,10 @@ const Login = () => {
 
   return (
     <div className='dark dark:bg-gray-900'>
+      <Head>
+        <link rel='icon' href='/images/public/websiteSlogan.webp' />
+        <title>Login your account</title>
+      </Head>
       <Header />
       <Image
         src={backgroundImg}

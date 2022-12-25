@@ -24,7 +24,7 @@ const MY_PROJECT_CONTENT = [
     {
       // TODO: Update linke and image to new blog
       img: BlogScreenShotPic,
-      url: undefined,
+      url: "/blogs",
       des: ["Personal Blog", "Blog website", BlogDesParagraph],
     },
   ],

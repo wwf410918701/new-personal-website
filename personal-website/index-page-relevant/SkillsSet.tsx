@@ -12,7 +12,7 @@ const SKILLSSET_CONTENT = [
 ];
 
 const SkillsSet = () => (
-  <div className='z-10 flex flex-col items-center justify-center w-full mt-20'>
+  <div className='z-10 flex flex-col items-center justify-center w-full'>
     <div className='z-10 flex flex-col items-center justify-center'>
       <svg
         className='w-12 h-12 mb-2 text-cGreen'

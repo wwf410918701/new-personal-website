@@ -12,6 +12,9 @@ import defaultBlogPoster from "../../public/images/blog/default-blog-poster.png"
 import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
+import Head from "next/head";
+import { useInView } from "react-intersection-observer";
+
 interface IMyBlogs {
   summaries: Summary[];
 }
@@ -65,6 +68,10 @@ const MyBlogs = observer(() => {
 
   return (
     <div className='dark dark:bg-gray-900'>
+      <Head>
+        <link rel='icon' href='/images/public/websiteSlogan.webp' />
+        <title>Your own blogs</title>
+      </Head>
       <Header />
       <Image
         src={backgroundImg}
@@ -128,7 +135,9 @@ const MyBlogs = observer(() => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  setDeleteConfirmModalVisible(() => ({ [summary.id]: true }));
+                  setDeleteConfirmModalVisible(() => ({
+                    [summary.id]: true,
+                  }));
                 }}
               >
                 <svg

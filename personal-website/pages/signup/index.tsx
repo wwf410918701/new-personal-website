@@ -8,6 +8,7 @@ import Router from "next/router";
 import ConfirmModal from "../../components/ConfirmModal";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
+import Head from "next/head";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -83,6 +84,10 @@ const SignUp = () => {
 
   return (
     <div className='dark dark:bg-gray-900'>
+      <Head>
+        <link rel='icon' href='/images/public/websiteSlogan.webp' />
+        <title>Create new account</title>
+      </Head>
       <Header />
       <Image
         src={backgroundImg}
