@@ -13,7 +13,6 @@ import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
-import { useInView } from "react-intersection-observer";
 
 interface IMyBlogs {
   summaries: Summary[];
@@ -86,8 +85,11 @@ const MyBlogs = observer(() => {
             <div className='w-full border-b border-gray-200 dark:border-gray-600' />
           </div>
         </div>
-        {summaries.map((summary) => (
-          <div className='flex flex-col items-center sm:flex-row gap-x-5'>
+        {summaries.map((summary, index) => (
+          <div
+            className='flex flex-col items-center sm:flex-row gap-x-5'
+            key={`summary-${index}`}
+          >
             <ConfirmModal
               visible={deleteConfirmModalVisible[summary.id]}
               type={"error"}

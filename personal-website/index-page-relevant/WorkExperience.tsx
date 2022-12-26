@@ -17,7 +17,7 @@ const WORK_ERPERIENCE_CONTENT: WorkExperience[] = [
     endTime: "Now",
     companyName: "Kepple / Spark Relief Teachers",
     position: "Part Time Frontend Developer",
-    base: "Melbourne - Collingwood",
+    base: "Melbourne / Collingwood",
     Des: [
       {
         workOutCome: (
@@ -139,8 +139,8 @@ const WorkExperience = () => (
             <h2 className='font-semibold text-gray-900 dark:text-white'>
               {content.companyName}
             </h2>
-            <p className='mb-5 text-lg font-semibold text-gray-800 dark:text-gray-200'>
-              {`${content.position}`}
+            <p className='text-lg font-semibold text-gray-800 dark:text-gray-200'>
+              {`${content.position} - ${content.base}`}
             </p>
             {content.Des.map((d) => (
               <div key={d.workOutCome.toString()}>

@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import Paper from "../../components/Paper";
-import { RootStoreContext } from "../_app";
 import Router from "next/router";
 import ConfirmModal from "../../components/ConfirmModal";
 import backgroundImg from "../../public/images/public/background-img.jpg";
@@ -118,7 +117,7 @@ const SignUp = () => {
                     htmlFor='userName'
                     className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                   >
-                    User's Name
+                    {"User's Name"}
                   </label>
                   <Input
                     onUpdate={(input) => {

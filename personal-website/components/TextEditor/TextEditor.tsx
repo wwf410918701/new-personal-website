@@ -161,6 +161,7 @@ const TextEditor = ({
         message='Errors happen when uploading image, please try again'
         visible={uploadingImageStatus === "failure"}
         onConfirm={() => setUploadingImageStatus("default")}
+        onCancel={() => setUploadingImageStatus("default")}
       />
       <div style={{ border: "1px solid #ccc", zIndex: 100 }}>
         <Toolbar

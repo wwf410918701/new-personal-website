@@ -28,7 +28,7 @@ const Blogs = ({ summaries }: IBlogs) => {
 
   useEffect(() => {
     setLoadedAnimation(true);
-  });
+  }, []);
 
   return (
     <div className='dark dark:bg-gray-900'>
@@ -74,6 +74,7 @@ const Blogs = ({ summaries }: IBlogs) => {
         >
           {summaries.map((summary, index) => (
             <div
+              key={`summary-${index}`}
               className={`${
                 blogsListInView
                   ? "fadeIn-animation-loaded"

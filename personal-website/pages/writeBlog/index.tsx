@@ -93,6 +93,9 @@ const WriteBlogPage = () => {
           );
         })
         .then(() => {
+          fetch(
+            "/api/revalidateBlogs?secret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NDA2MDIxOTk5MDUwNiIsIm5hbWUiOiJKaW1teSBXdSIsIndlYnNpdGUiOiJwZXJzb25hbCBibG9nIG9mIEppbW15In0.AJeRrqzPP06IWCbKOwfjjxT9oOS4CMfBOdVhduNjg5Q"
+          );
           setSubmitStatus("success");
           Router.push("/blogs");
         })

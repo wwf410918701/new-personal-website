@@ -67,7 +67,6 @@ export default function Home() {
                   : "fadeIn-animation-preLoad"
               } dark:bg-gray-800 md:w-260 w-100 pt-10 md:mt-5 !mt-24 rounded-2xl`}
             >
-              {/*  md:m-40 m-5 pt-20 */}
               <section
                 id='WorkExperience'
                 className='snap-start'

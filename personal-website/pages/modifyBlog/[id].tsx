@@ -82,7 +82,7 @@ const ModifyBlog = () => {
           console.log(e);
         });
     }
-  }, []);
+  }, [id]);
 
   const handleBlogModification = () => {
     setHasTouched({
