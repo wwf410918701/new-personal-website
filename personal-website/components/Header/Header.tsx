@@ -84,31 +84,9 @@ const Header = observer(() => {
   const { asPath } = useRouter();
 
   useEffect(() => {
-    // fetch("/api/user-infos")
-    //   .then(async (response) => {
-    //     console.log("user-info in header");
-    //     const data = await response.json();
-    //     console.log(data);
-    //     return data;
-    //   })
-    //   .then((response) => {
-    //     if (response.uid) {
-    //       const res = response as LoginResData;
-    //       userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log("Error when updating user login status");
-    //     console.log(e);
-    //   });
-
-    //
-    console.log("onAuthStateChanged");
     auth.onAuthStateChanged((user) => {
       if (user) {
         fetchUserInfo(user.uid).then((userInfo: any) => {
-          console.log("userInfo");
-          console.log(userInfo);
           if (user.displayName && !userInfo) {
             storeUser(
               user.uid,
@@ -207,7 +185,6 @@ const Header = observer(() => {
                         .then((response) => {
                           if (response.status === 200) {
                             userStore.userLogout();
-                            console.log(userStore.userID);
                           } else {
                             console.log("Fail to log out users");
                           }

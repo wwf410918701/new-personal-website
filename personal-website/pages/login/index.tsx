@@ -60,24 +60,6 @@ const Login = () => {
       });
 
       if (!Object.values(error).includes(true)) {
-        //   fetch("/api/login", {
-        //     method: "POST",
-        //     headers: {
-        //       Accept: "application/json",
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ email, password }),
-        //   })
-        //     .then((response) => response.json())
-        //     .then((response) => {
-        //       const res = response as LoginResData;
-        //       console.log("login response");
-        //       console.log(res);
-        //       userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
-        //     })
-        //     .then(() => {
-        //       Router.push("/");
-        //     });
         auth.signInWithEmailAndPassword(email, password).then(() => {
           Router.push("/");
         });
@@ -85,7 +67,6 @@ const Login = () => {
     } catch (error) {
       console.log("Error when sign in user");
       console.log(error);
-      // setShowFailureMessage(true);
     }
   };
 

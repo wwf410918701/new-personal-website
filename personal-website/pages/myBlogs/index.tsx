@@ -31,8 +31,6 @@ const MyBlogs = observer(() => {
       userStore.userBlogs.map((blogid) => fetchPostSummary(blogid))
     )
       .then((results) => {
-        console.log("result");
-        console.log(results);
         setSummaries(
           results
             .map((result) => {
