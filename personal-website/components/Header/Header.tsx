@@ -127,7 +127,7 @@ const Header = observer(() => {
         //   );
         // });
         console.log("user exist");
-        userStore.userLogin(user.uid, "", user?.email ?? "", []);
+        userStore.userLogin("111", "", "126@126.com" ?? "", []);
       }
     });
   }, []);
