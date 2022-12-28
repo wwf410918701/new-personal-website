@@ -103,6 +103,7 @@ const Header = observer(() => {
     //   });
 
     //
+    console.log("onAuthStateChanged");
     auth.onAuthStateChanged((user) => {
       if (user) {
         fetchUserInfo(user.uid).then((userInfo: any) => {
