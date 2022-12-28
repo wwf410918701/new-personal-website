@@ -49,6 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           await res.send(resData);
         });
       }
+      await res.send(resData);
     });
   } catch (error) {
     console.log("Error when logging in user");

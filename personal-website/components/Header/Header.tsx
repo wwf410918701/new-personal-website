@@ -5,6 +5,9 @@ import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../pages/_app";
 import { useRouter } from "next/router";
 import { LoginResData } from "../../mobx/helper";
+import { auth } from "../../firebase/config";
+import { fetchUserInfo, storeUser } from "../../firebase/usersRelevantApis";
+import moment from "moment";
 
 interface IHeaderInButton {
   text: string;
@@ -81,23 +84,48 @@ const Header = observer(() => {
   const { asPath } = useRouter();
 
   useEffect(() => {
-    fetch("/api/user-infos")
-      .then(async (response) => {
-        console.log("user-info in header");
-        const data = await response.json();
-        console.log(data);
-        return data;
-      })
-      .then((response) => {
-        if (response.uid) {
-          const res = response as LoginResData;
-          userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
-        }
-      })
-      .catch((e) => {
-        console.log("Error when updating user login status");
-        console.log(e);
-      });
+    // fetch("/api/user-infos")
+    //   .then(async (response) => {
+    //     console.log("user-info in header");
+    //     const data = await response.json();
+    //     console.log(data);
+    //     return data;
+    //   })
+    //   .then((response) => {
+    //     if (response.uid) {
+    //       const res = response as LoginResData;
+    //       userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log("Error when updating user login status");
+    //     console.log(e);
+    //   });
+
+    //
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchUserInfo(user.uid).then((userInfo: any) => {
+          console.log("userInfo");
+          console.log(userInfo);
+          if (user.displayName && !userInfo) {
+            storeUser(
+              user.uid,
+              user.displayName,
+              user.email ?? "",
+              moment().format("MMM Do YY"),
+              []
+            );
+          }
+          userStore.userLogin(
+            user.uid,
+            userInfo.displayName,
+            user?.email ?? "",
+            userInfo.blogs
+          );
+        });
+      }
+    });
   }, []);
 
   const toggleDropdown = () => {
