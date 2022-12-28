@@ -1,4 +1,4 @@
-import CodingPng from "../public/images/index/CodingPng.png";
+import CodingPng from "../public/images/index/codingPng.png";
 import Image from "next/image";
 import PersonalLinkedInIcon from "../components/PersonalLinkedIcon";
 
