@@ -57,6 +57,11 @@ const MyBlogs = observer(() => {
           )
         );
       })
+      .then(async () => {
+        await fetch(
+          "/api/revalidateBlogs?secret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NDA2MDIxOTk5MDUwNiIsIm5hbWUiOiJKaW1teSBXdSIsIndlYnNpdGUiOiJwZXJzb25hbCBibG9nIG9mIEppbW15In0.AJeRrqzPP06IWCbKOwfjjxT9oOS4CMfBOdVhduNjg5Q"
+        );
+      })
       .catch((error) => {
         console.log("Error when deleting blogs " + " postID");
         console.log(error);
