@@ -76,7 +76,7 @@ const Blogs = ({ summaries }: IBlogs) => {
             <div
               key={`summary-${index}`}
               className={`${
-                blogsListInView
+                blogsListInView || loadedAnimation
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
               }`}

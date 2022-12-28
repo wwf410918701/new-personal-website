@@ -11,6 +11,7 @@ import { LoginResData } from "../../mobx/helper";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import { auth } from "../../firebase/config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -59,24 +60,27 @@ const Login = () => {
       });
 
       if (!Object.values(error).includes(true)) {
-        fetch("/api/login", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            const res = response as LoginResData;
-            console.log("login response");
-            console.log(res);
-            userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
-          })
-          .then(() => {
-            Router.push("/");
-          });
+        //   fetch("/api/login", {
+        //     method: "POST",
+        //     headers: {
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ email, password }),
+        //   })
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //       const res = response as LoginResData;
+        //       console.log("login response");
+        //       console.log(res);
+        //       userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
+        //     })
+        //     .then(() => {
+        //       Router.push("/");
+        //     });
+        auth.signInWithEmailAndPassword(email, password).then(() => {
+          Router.push("/");
+        });
       }
     } catch (error) {
       console.log("Error when sign in user");
