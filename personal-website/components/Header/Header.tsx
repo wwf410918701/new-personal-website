@@ -104,32 +104,33 @@ const Header = observer(() => {
 
     //
     console.log("onAuthStateChanged");
-    auth.onAuthStateChanged((user) => {
-      console.log("check user");
-      if (user) {
-        // fetchUserInfo(user.uid).then((userInfo: any) => {
-        //   console.log("userInfo");
-        //   console.log(userInfo);
-        //   if (user.displayName && !userInfo) {
-        //     storeUser(
-        //       user.uid,
-        //       user.displayName,
-        //       user.email ?? "",
-        //       moment().format("MMM Do YY"),
-        //       []
-        //     );
-        //   }
-        //   userStore.userLogin(
-        //     user.uid,
-        //     userInfo.displayName,
-        //     user?.email ?? "",
-        //     userInfo.blogs
-        //   );
-        // });
-        console.log("user exist");
-        userStore.userLogin("111", "", "126@126.com" ?? "", []);
-      }
-    });
+    // auth.onAuthStateChanged((user) => {
+    //   console.log("check user");
+    //   if (user) {
+    //     // fetchUserInfo(user.uid).then((userInfo: any) => {
+    //     //   console.log("userInfo");
+    //     //   console.log(userInfo);
+    //     //   if (user.displayName && !userInfo) {
+    //     //     storeUser(
+    //     //       user.uid,
+    //     //       user.displayName,
+    //     //       user.email ?? "",
+    //     //       moment().format("MMM Do YY"),
+    //     //       []
+    //     //     );
+    //     //   }
+    //     //   userStore.userLogin(
+    //     //     user.uid,
+    //     //     userInfo.displayName,
+    //     //     user?.email ?? "",
+    //     //     userInfo.blogs
+    //     //   );
+    //     // });
+    //     console.log("user exist");
+    //     userStore.userLogin("111", "", "126@126.com" ?? "", []);
+    //   }
+    // });
+    userStore.userLogin("111", "", "126@126.com" ?? "", []);
   }, []);
 
   const toggleDropdown = () => {
