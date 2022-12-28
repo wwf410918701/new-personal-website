@@ -105,6 +105,7 @@ const Header = observer(() => {
     //
     console.log("onAuthStateChanged");
     auth.onAuthStateChanged((user) => {
+      console.log("check user");
       if (user) {
         // fetchUserInfo(user.uid).then((userInfo: any) => {
         //   console.log("userInfo");
@@ -125,6 +126,7 @@ const Header = observer(() => {
         //     userInfo.blogs
         //   );
         // });
+        console.log("user exist");
         userStore.userLogin(user.uid, "", user?.email ?? "", []);
       }
     });
