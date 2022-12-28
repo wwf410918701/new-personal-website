@@ -1,8 +1,8 @@
-import moment from 'moment';
-import { NextApiRequest, NextApiResponse } from 'next/types'
-import { auth } from '../../firebase/config';
-import { fetchUserInfo, storeUser } from '../../firebase/usersRelevantApis';
-import { LoginResData } from '../../mobx/helper';
+import moment from "moment";
+import { NextApiRequest, NextApiResponse } from "next/types";
+import { auth } from "../../firebase/config";
+import { fetchUserInfo, storeUser } from "../../firebase/usersRelevantApis";
+import { LoginResData } from "../../mobx/helper";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -16,10 +16,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               uid: user.uid,
               displayName: userInfo.displayName,
               email: user.email as string,
-              blogs: userInfo.blogs
+              blogs: userInfo.blogs,
             };
-          }
-          else if (user.displayName && !userInfo) {
+          } else if (user.displayName && !userInfo) {
             storeUser(
               user.uid,
               user.displayName,
@@ -31,18 +30,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               uid: user.uid,
               displayName: user.displayName,
               email: user.email as string,
-              blogs: null
+              blogs: null,
             };
-            
           }
-          res.send(resData)
+          res.send(resData);
         });
-      }})
+      } else {
+        res.send({});
+      }
+    });
   } catch (error) {
-    console.log('Error when getting user infos')
-    res.status(405).send({ message: 'Fail get user infos' })
-    return
+    console.log("Error when getting user infos");
+    res.status(405).send({ message: "Fail get user infos" });
+    return;
   }
-}
+};
 
-export default handler
+export default handler;

@@ -82,10 +82,17 @@ const Header = observer(() => {
 
   useEffect(() => {
     fetch("/api/user-infos")
-      .then((response) => response.json())
       .then((response) => {
-        const res = response as LoginResData;
-        userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
+        console.log("user-info in header");
+        console.log(response);
+        console.log(response.json());
+        return response.json();
+      })
+      .then((response) => {
+        if (response.uid) {
+          const res = response as LoginResData;
+          userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
+        }
       })
       .catch((e) => {
         console.log("Error when updating user login status");

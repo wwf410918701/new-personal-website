@@ -20,9 +20,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     let resData: LoginResData;
 
     await auth.signInWithEmailAndPassword(body.email, body.password);
-    auth.onAuthStateChanged((user) => {
+    await auth.onAuthStateChanged(async (user) => {
       if (user) {
-        fetchUserInfo(user.uid).then((userInfo) => {
+        await fetchUserInfo(user.uid).then(async (userInfo) => {
           if (userInfo?.displayName) {
             resData = {
               uid: user.uid,
@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             };
             // storeUser(user.uid, user.displayName, user.email, new Date())
           } else if (user.displayName && !userInfo) {
-            storeUser(
+            await storeUser(
               user.uid,
               user.displayName,
               user.email ?? "",
@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               blogs: null,
             };
           }
-          res.send(resData);
+          await res.send(resData);
         });
       }
     });
