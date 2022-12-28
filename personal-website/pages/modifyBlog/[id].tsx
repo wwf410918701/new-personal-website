@@ -6,7 +6,11 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import LoadingButton from "../../components/LoadingButton";
-import TextEditor from "../../components/TextEditor/TextEditor";
+// NOTE: text editor can't be generate through ssr, so can't be imported through general way
+const TextEditor = dynamic(import("../../components/TextEditor/TextEditor"), {
+  ssr: false,
+});
+// import TextEditor from "../../components/TextEditor/TextEditor";
 import { fetchPost, fetchPostSummary } from "../../firebase/blogApis";
 import { updatePost, uploadImg } from "../../firebase/blogApisWithoutType";
 import { Blog, UploadingStatus } from "../../firebase/type";
@@ -14,6 +18,7 @@ import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 
 const summaryInputHasError = (Summary: string) => {
   if (Summary.trim().length === 0) {
