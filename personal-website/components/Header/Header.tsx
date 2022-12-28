@@ -82,11 +82,10 @@ const Header = observer(() => {
 
   useEffect(() => {
     fetch("/api/user-infos")
-      .then((response) => {
+      .then(async (response) => {
         console.log("user-info in header");
-        console.log(response);
-        console.log(response.json());
-        return response.json();
+        const data = await response.json();
+        return data;
       })
       .then((response) => {
         if (response.uid) {
