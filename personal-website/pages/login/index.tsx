@@ -70,6 +70,8 @@ const Login = () => {
           .then((response) => response.json())
           .then((response) => {
             const res = response as LoginResData;
+            console.log("login response");
+            console.log(res);
             userStore.userLogin(res.uid, res.displayName, res.email, res.blogs);
           })
           .then(() => {
