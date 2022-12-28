@@ -1,22 +1,22 @@
-import moment from 'moment';
-import { NextApiRequest, NextApiResponse } from 'next/types'
-import { auth } from '../../firebase/config';
-import { fetchUserInfo, storeUser } from '../../firebase/usersRelevantApis';
-import { LoginResData } from '../../mobx/helper';
+import moment from "moment";
+import { NextApiRequest, NextApiResponse } from "next/types";
+import { auth } from "../../firebase/config";
+import { fetchUserInfo, storeUser } from "../../firebase/usersRelevantApis";
+import { LoginResData } from "../../mobx/helper";
 
 type UserEmailAndPassword = {
-  email: string,
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'POST') {
-    res.status(405).send({ message: 'Only POST requests allowed' })
-    return
+  if (req.method !== "POST") {
+    res.status(405).send({ message: "Only POST requests allowed" });
+    return;
   }
 
   try {
-    const body = req.body
+    const body = req.body;
     let resData: LoginResData;
 
     await auth.signInWithEmailAndPassword(body.email, body.password);
@@ -28,11 +28,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               uid: user.uid,
               displayName: userInfo.displayName,
               email: user.email as string,
-              blogs: userInfo.blogs
+              blogs: userInfo.blogs,
             };
             // storeUser(user.uid, user.displayName, user.email, new Date())
-          }
-          else if (user.displayName && !userInfo) {
+          } else if (user.displayName && !userInfo) {
             storeUser(
               user.uid,
               user.displayName,
@@ -44,20 +43,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
               uid: user.uid,
               displayName: user.displayName,
               email: user.email as string,
-              blogs: null
+              blogs: null,
             };
-            
           }
-          res.send(resData)
+          res.send(resData);
         });
       }
     });
   } catch (error) {
-    console.log('Error when logging in user')
-    res.status(405).send({ message: 'Fail to login user' })
-    return
+    console.log("Error when logging in user");
+    res.status(405).send({ message: `Fail to login user: ${error}` });
+    return;
   }
-  };
+};
 
-
-export default handler
+export default handler;
