@@ -106,25 +106,26 @@ const Header = observer(() => {
     console.log("onAuthStateChanged");
     auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchUserInfo(user.uid).then((userInfo: any) => {
-          console.log("userInfo");
-          console.log(userInfo);
-          if (user.displayName && !userInfo) {
-            storeUser(
-              user.uid,
-              user.displayName,
-              user.email ?? "",
-              moment().format("MMM Do YY"),
-              []
-            );
-          }
-          userStore.userLogin(
-            user.uid,
-            userInfo.displayName,
-            user?.email ?? "",
-            userInfo.blogs
-          );
-        });
+        // fetchUserInfo(user.uid).then((userInfo: any) => {
+        //   console.log("userInfo");
+        //   console.log(userInfo);
+        //   if (user.displayName && !userInfo) {
+        //     storeUser(
+        //       user.uid,
+        //       user.displayName,
+        //       user.email ?? "",
+        //       moment().format("MMM Do YY"),
+        //       []
+        //     );
+        //   }
+        //   userStore.userLogin(
+        //     user.uid,
+        //     userInfo.displayName,
+        //     user?.email ?? "",
+        //     userInfo.blogs
+        //   );
+        // });
+        userStore.userLogin(user.uid, "", user?.email ?? "", []);
       }
     });
   }, []);
