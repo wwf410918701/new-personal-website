@@ -85,6 +85,7 @@ const Header = observer(() => {
       .then(async (response) => {
         console.log("user-info in header");
         const data = await response.json();
+        console.log(data);
         return data;
       })
       .then((response) => {
