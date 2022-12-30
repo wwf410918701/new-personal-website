@@ -74,8 +74,6 @@ const ModifyBlog = () => {
         })
         .then(() => {
           fetchPostSummary(id as string).then((blogSummary) => {
-            console.log("fetch summary");
-            console.log(blogSummary);
             if (blogSummary) {
               setSummary(blogSummary.summary);
               setPosterUrl(blogSummary.posterImgUrl);
