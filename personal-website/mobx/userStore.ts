@@ -3,22 +3,27 @@ import RootStore from "./rootStore";
 
 class userStore {
   userID: string | null = null;
-  userEmail: string | null = null
-  userName: string | null = null
+  userEmail: string | null = null;
+  userName: string | null = null;
   rootStore: RootStore | null = null;
-  userBlogs: number[] = [];
+  userBlogs: string[] = [];
 
   constructor(rootStore: RootStore) {
-    makeAutoObservable(this, { rootStore: false }, { autoBind: true })
-    this.rootStore = rootStore
+    makeAutoObservable(this, { rootStore: false }, { autoBind: true });
+    this.rootStore = rootStore;
   }
 
-  userLogin(userID: string, userName: string, userEmail: string, userBlogs: number[] | null) {
-    this.userID = userID
-    this.userName = userName
-    this.userEmail = userEmail
-    if(userBlogs) {
-      this.userBlogs = userBlogs
+  userLogin(
+    userID: string,
+    userName: string,
+    userEmail: string,
+    userBlogs: string[] | null
+  ) {
+    this.userID = userID;
+    this.userName = userName;
+    this.userEmail = userEmail;
+    if (userBlogs) {
+      this.userBlogs = userBlogs;
     }
   }
 
@@ -29,11 +34,11 @@ class userStore {
   }
 
   updateUserEmail(userEmail: string) {
-    this.userEmail = userEmail
+    this.userEmail = userEmail;
   }
 
   updateUserName(userName: string) {
-    this.userName = userName
+    this.userName = userName;
   }
 }
 
