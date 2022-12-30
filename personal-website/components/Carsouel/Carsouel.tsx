@@ -1,5 +1,5 @@
 // import "./carousel-wrapper.styles.scss";
-
+import defaultBlogPoster from "../../public/images/blog/default-blog-poster.png";
 import { useState } from "react";
 
 interface ICarsouelWrapper {
@@ -38,7 +38,7 @@ const Carousel = ({ images }: ICarsouelWrapper) => {
             data-carousel-item='active'
           >
             <img
-              src={image.src}
+              src={image.src ?? defaultBlogPoster}
               className='absolute block object-contain w-full -translate-x-1/2 -translate-y-1/2 rounded-lg cursor-pointer top-1/2 left-1/2'
               alt={image.title}
               onClick={() => window.open(`blog/${image.linkPage}`)}

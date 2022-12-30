@@ -17,6 +17,7 @@ import { uploadImg, storePost } from "../../firebase/blogApisWithoutType";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import { v4 as uuidv4 } from "uuid";
 
 const summaryInputHasError = (Summary: string) => {
   if (Summary.trim().length === 0) {
@@ -83,7 +84,10 @@ const WriteBlogPage = () => {
     if (posterFile) {
       uploadImg(posterName, posterFile)
         .then(async (posterImgUrl) => {
+          const blogId = uuidv4();
+
           await storePost(
+            blogId,
             title,
             summary,
             paragraph,
@@ -91,9 +95,17 @@ const WriteBlogPage = () => {
             posterImgUrl,
             userStore.userID
           ).then(async () => {
-            await fetch(
-              "/api/revalidateBlogs?secret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NDA2MDIxOTk5MDUwNiIsIm5hbWUiOiJKaW1teSBXdSIsIndlYnNpdGUiOiJwZXJzb25hbCBibG9nIG9mIEppbW15In0.AJeRrqzPP06IWCbKOwfjjxT9oOS4CMfBOdVhduNjg5Q"
-            );
+            await fetch("/api/revalidateBlogs");
+            await fetch("/api/revalidateBlog", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                blogId,
+              }),
+            });
           });
         })
         .then(async () => {
@@ -106,7 +118,10 @@ const WriteBlogPage = () => {
           setSubmitStatus("failure");
         });
     } else {
+      const blogId = uuidv4();
+
       storePost(
+        blogId,
         title,
         summary,
         paragraph,
@@ -115,9 +130,17 @@ const WriteBlogPage = () => {
         userStore.userID
       )
         .then(async () => {
-          await fetch(
-            "/api/revalidateBlogs?secret=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NDA2MDIxOTk5MDUwNiIsIm5hbWUiOiJKaW1teSBXdSIsIndlYnNpdGUiOiJwZXJzb25hbCBibG9nIG9mIEppbW15In0.AJeRrqzPP06IWCbKOwfjjxT9oOS4CMfBOdVhduNjg5Q"
-          );
+          await fetch("/api/revalidateBlogs");
+          await fetch("/api/revalidateBlog", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              blogId,
+            }),
+          });
           setSubmitStatus("success");
           Router.push("/blogs");
         })

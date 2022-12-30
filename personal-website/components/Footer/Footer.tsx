@@ -11,6 +11,23 @@ const Footer = () => (
         <PersonalLinkedInIcon />
         <PersonalGithubIcon />
       </div>
+      {/* <button
+        onClick={(e) => {
+          e.preventDefault();
+          fetch("/api/revalidateBlog", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: 111,
+            }),
+          });
+        }}
+      >
+        test
+      </button> */}
     </div>
   </footer>
 );

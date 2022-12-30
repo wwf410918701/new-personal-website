@@ -5,6 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    console.log("validate blog lists");
     await res.revalidate("/blogs");
     return res.json({ revalidated: true });
   } catch (err) {

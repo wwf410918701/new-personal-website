@@ -110,7 +110,7 @@ export const updatePost = async(postID, title, summary, paragraph, author, poste
   return true
 }
 
-export const storePost = async(title, summary, paragraph, author, posterImgUrl, userID) => {
+export const storePost = async(blogId, title, summary, paragraph, author, posterImgUrl, userID) => {
   const createAt = moment().format("DD/MM/YYYY") 
   const postsSummariesCollectionRef = firestore.collection(`postsAbstract/`)
   
@@ -119,10 +119,10 @@ export const storePost = async(title, summary, paragraph, author, posterImgUrl, 
       return lastData.docs[0].data().id
     })
     .then(async (lastId) => {
-      const postAbstractRef = firestore.doc(`postsAbstract/${lastId+1}`)
+      const postAbstractRef = firestore.doc(`postsAbstract/${blogId}`)
       await postAbstractRef.set(
         {
-          id: lastId + 1,
+          id: blogId,
           title,
           summary,
           time: createAt,
@@ -131,10 +131,10 @@ export const storePost = async(title, summary, paragraph, author, posterImgUrl, 
         }
       )
       .then(async() => {
-        const postRef = firestore.doc(`posts/${lastId+1}`)
+        const postRef = firestore.doc(`posts/${blogId}`)
         await postRef.set(
           {
-              id: lastId + 1,
+              id: blogId,
               title,
               content: paragraph,
               comments: [],
@@ -144,7 +144,7 @@ export const storePost = async(title, summary, paragraph, author, posterImgUrl, 
         )
       })
       .then(async () => {
-        await addBlogToUserAccount(userID, (lastId + 1))
+        await addBlogToUserAccount(userID, blogId)
       })
     })
   .catch((e) => {

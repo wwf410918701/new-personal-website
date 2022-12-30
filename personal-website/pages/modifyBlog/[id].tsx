@@ -115,7 +115,18 @@ const ModifyBlog = () => {
             userStore.userName,
             posterImgUrl,
             userStore.userID
-          );
+          ).then(() => {
+            fetch("/api/revalidateBlog", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id,
+              }),
+            });
+          });
         })
         .then(() => {
           setSubmitStatus("success");
@@ -137,6 +148,16 @@ const ModifyBlog = () => {
       )
         .then(() => {
           setSubmitStatus("success");
+          fetch("/api/revalidateBlog", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id,
+            }),
+          });
           router.push("/blogs");
         })
         .catch((e) => {
