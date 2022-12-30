@@ -13,7 +13,7 @@ const TextEditor = dynamic(import("../../components/TextEditor/TextEditor"), {
 // import TextEditor from "../../components/TextEditor/TextEditor";
 import { fetchPost, fetchPostSummary } from "../../firebase/blogApis";
 import { updatePost, uploadImg } from "../../firebase/blogApisWithoutType";
-import { Blog, UploadingStatus } from "../../firebase/type";
+import { UploadingStatus } from "../../firebase/type";
 import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
@@ -73,7 +73,9 @@ const ModifyBlog = () => {
           }
         })
         .then(() => {
-          fetchPostSummary(parseInt(id as string)).then((blogSummary) => {
+          fetchPostSummary(id as string).then((blogSummary) => {
+            console.log("fetch summary");
+            console.log(blogSummary);
             if (blogSummary) {
               setSummary(blogSummary.summary);
               setPosterUrl(blogSummary.posterImgUrl);
@@ -140,6 +142,7 @@ const ModifyBlog = () => {
         });
     } else {
       updatePost(
+        id,
         title,
         summary,
         paragraph,

@@ -1,6 +1,5 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Paper from "../../components/Paper";
 import { fetchAllPostsSummaries, fetchPost } from "../../firebase/blogApis";
 import { Blog } from "../../firebase/type";
 import CommentCard from "./components/CommentCard";

@@ -76,7 +76,7 @@ export const updatePost = async(postID, title, summary, paragraph, author, poste
   const createAt = moment().format("DD/MM/YYYY") 
   const postAbstractRef = firestore.doc(`postsAbstract/${postID}`)
   const postRef = firestore.doc(`posts/${postID}`)
-  const blogComments = await (await postRef.get()).data()['comments']
+  const blogComments = await (await postRef.get()).data()?.comments?? []
 
   await postAbstractRef.set(
     {

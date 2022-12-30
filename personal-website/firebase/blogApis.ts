@@ -140,7 +140,7 @@ export const uploadBlogsImgs = (
   });
 };
 
-export const fetchPostSummary = (id: number) => {
+export const fetchPostSummary = (id: string) => {
   const postSummaryRef = firestore.doc(`postsAbstract/${id}`);
 
   return postSummaryRef
