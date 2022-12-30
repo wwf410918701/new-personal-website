@@ -103,7 +103,7 @@ const WriteBlogPage = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                blogId,
+                id: blogId,
               }),
             });
           });
@@ -138,7 +138,7 @@ const WriteBlogPage = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              blogId,
+              id: blogId,
             }),
           });
           setSubmitStatus("success");

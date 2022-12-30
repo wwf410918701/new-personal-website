@@ -115,8 +115,9 @@ const ModifyBlog = () => {
             userStore.userName,
             posterImgUrl,
             userStore.userID
-          ).then(() => {
-            fetch("/api/revalidateBlog", {
+          ).then(async () => {
+            await fetch("/api/revalidateBlogs");
+            await fetch("/api/revalidateBlog", {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -146,9 +147,9 @@ const ModifyBlog = () => {
         null,
         userStore.userID
       )
-        .then(() => {
-          setSubmitStatus("success");
-          fetch("/api/revalidateBlog", {
+        .then(async () => {
+          await fetch("/api/revalidateBlogs");
+          await fetch("/api/revalidateBlog", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -158,6 +159,7 @@ const ModifyBlog = () => {
               id,
             }),
           });
+          setSubmitStatus("success");
           router.push("/blogs");
         })
         .catch((e) => {

@@ -112,48 +112,70 @@ export const updatePost = async(postID, title, summary, paragraph, author, poste
 
 export const storePost = async(blogId, title, summary, paragraph, author, posterImgUrl, userID) => {
   const createAt = moment().format("DD/MM/YYYY") 
-  const postsSummariesCollectionRef = firestore.collection(`postsAbstract/`)
-  
-  postsSummariesCollectionRef.orderBy('id', 'desc').limit(1).get()
-    .then(lastData => {
-      return lastData.docs[0].data().id
-    })
-    .then(async (lastId) => {
-      const postAbstractRef = firestore.doc(`postsAbstract/${blogId}`)
-      await postAbstractRef.set(
+  const postAbstractRef = firestore.doc(`postsAbstract/${blogId}`)
+
+  return postAbstractRef.set(
+    {
+      id: blogId,
+      title,
+      summary,
+      time: createAt,
+      author,
+      posterImgUrl,
+    }).then(async () => {
+      const postRef = firestore.doc(`posts/${blogId}`)
+      await postRef.set(
         {
-          id: blogId,
-          title,
-          summary,
-          time: createAt,
-          author,
-          posterImgUrl,
+            id: blogId,
+            title,
+            content: paragraph,
+            comments: [],
+            time: createAt,
+            author,
         }
-      )
-      .then(async() => {
-        const postRef = firestore.doc(`posts/${blogId}`)
-        await postRef.set(
-          {
-              id: blogId,
-              title,
-              content: paragraph,
-              comments: [],
-              time: createAt,
-              author,
-          }
         )
-      })
-      .then(async () => {
-        await addBlogToUserAccount(userID, blogId)
-      })
+    }).then(async () => {
+      await addBlogToUserAccount(userID, blogId)
     })
-  .catch((e) => {
-    // TODO:发生失败时数据库两个均需回退，也即删除已创建的某一部分数据
-    console.log('Error when saving post to firebase=>')
-    console.log(e)
-    return false
-  })
-  return true
+    .catch((e) => {
+      // TODO:发生失败时数据库两个均需回退，也即删除已创建的某一部分数据
+      console.log('Error when saving post to firebase=>')
+      console.log(e)
+    })
+  // return postsSummariesCollectionRef.orderBy('id', 'desc').limit(1).get()
+  //   .then(lastData => {
+  //     return lastData.docs[0].data().id
+  //   })
+  //   .then(async (lastId) => {
+  //     const postAbstractRef = firestore.doc(`postsAbstract/${blogId}`)
+  //     await postAbstractRef.set(
+  //       {
+  //         id: blogId,
+  //         title,
+  //         summary,
+  //         time: createAt,
+  //         author,
+  //         posterImgUrl,
+  //       }
+  //     )
+  //     .then(async() => {
+  //       const postRef = firestore.doc(`posts/${blogId}`)
+  //       await postRef.set(
+  //         {
+  //             id: blogId,
+  //             title,
+  //             content: paragraph,
+  //             comments: [],
+  //             time: createAt,
+  //             author,
+  //         }
+  //       )
+  //     })
+  //     .then(async () => {
+  //       await addBlogToUserAccount(userID, blogId)
+  //     })
+  //   })
+  
 }
 
 export const deletePost = (postID, userID) => {
@@ -161,10 +183,10 @@ export const deletePost = (postID, userID) => {
   const postAbstractRef = firestore.doc(`postsAbstract/${postID}`)
 
   return postRef.delete()
-  .then(() => {
-    postAbstractRef.delete()
-    .then(() => deletePostBelongingOnUserAccount(postID, userID))
+  .then(async () => {
+    await postAbstractRef.delete()
   })
+  .then(() => deletePostBelongingOnUserAccount(postID, userID))
 }
 
 const deletePostBelongingOnUserAccount = (postID, userID) => {

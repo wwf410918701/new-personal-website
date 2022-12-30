@@ -16,7 +16,7 @@ export default async function handler(
 
     const body = req.body as RequestData;
 
-    console.log("validate blog page");
+    console.log("validate blog page: " + `/blog/${body.id}`);
     await res.revalidate(`/blog/${body.id}`);
     return res.json({ revalidated: true });
   } catch (err) {
