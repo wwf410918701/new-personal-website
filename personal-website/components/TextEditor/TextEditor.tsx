@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { UploadingStatus } from "../../firebase/type";
 import { getImageTypeBasedOnFirebaseLink } from "../../firebase/helpers";
 import ConfirmModal from "../ConfirmModal";
-import { UploadImageSuccessRes } from "../../pages/api/upload-image";
 import {
   IDomEditor,
   IEditorConfig,
@@ -12,6 +11,7 @@ import {
 import { i18nChangeLanguage } from "@wangeditor/editor";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import "@wangeditor/editor/dist/css/style.css";
+import { uploadBlogsImgs } from "../../firebase/blogApis";
 
 type ImageElement = SlateElement & {
   src: string;
@@ -84,21 +84,10 @@ const TextEditor = ({
         console.log("file in client");
         console.log(file);
 
-        fetch("/api/upload-image", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ file, fileName: file.name }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            // globalUiStore.upLoadingImg = false
-            //update image to the editor based on the online url that is returned by the database
-            const imageData = response as UploadImageSuccessRes;
-            if (response.status === 200) {
-              insertFn(imageData.url, imageData.fileName, "");
+        uploadBlogsImgs(file.name, file)
+          .then((backwardUrl) => {
+            if (backwardUrl) {
+              insertFn(backwardUrl, file.name, "");
             } else {
               setUploadingImageStatus("failure");
             }

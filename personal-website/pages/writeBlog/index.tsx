@@ -18,6 +18,7 @@ import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
 import { v4 as uuidv4 } from "uuid";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const summaryInputHasError = (Summary: string) => {
   if (Summary.trim().length === 0) {
@@ -56,6 +57,8 @@ const WriteBlogPage = () => {
     summary: false,
     paragraph: false,
   });
+  const [cancelConfirmModalVisible, setCancelConfirmModalVisible] =
+    useState(false);
   const [submitStatus, setSubmitStatus] = useState<UploadingStatus>("default");
   const { userStore } = useContext(RootStoreContext);
 
@@ -159,6 +162,16 @@ const WriteBlogPage = () => {
         <title>Post your blog</title>
       </Head>
       <Header />
+      <ConfirmModal
+        type='error'
+        message='Errors happen when uploading image, please try again'
+        visible={cancelConfirmModalVisible}
+        onConfirm={() => {
+          setCancelConfirmModalVisible(false);
+          Router.push("/blogs");
+        }}
+        onCancel={() => setCancelConfirmModalVisible(false)}
+      />
       <Image
         src={backgroundImg}
         alt='flowerImg-background'
@@ -209,16 +222,17 @@ const WriteBlogPage = () => {
               Poster
             </h2>
             <FileUpload
-              updateFileName={function (fileName: string): void {
-                if (POSETER_TYPES.includes(fileName.split(".")[1])) {
+              updateFileName={function (fileName: string): void {}}
+              updateFile={function (file: File): void {
+                const fileType = file.type.split("/")[1];
+
+                if (POSETER_TYPES.includes(fileType)) {
                   setPosterHasError(false);
-                  setPosterName(fileName);
+                  setPosterName(file.name);
+                  setPosterFile(file);
                 } else {
                   setPosterHasError(true);
                 }
-              }}
-              updateFile={function (file: File): void {
-                setPosterFile(file);
               }}
               hasError={posterHasError}
             />
@@ -252,6 +266,7 @@ const WriteBlogPage = () => {
             </LoadingButton>
             <button
               type='button'
+              onClick={() => setCancelConfirmModalVisible(true)}
               className='focus:outline-none w-24 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900'
             >
               CANCEL
