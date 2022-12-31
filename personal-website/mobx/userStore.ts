@@ -22,9 +22,7 @@ class userStore {
     this.userID = userID;
     this.userName = userName;
     this.userEmail = userEmail;
-    if (userBlogs) {
-      this.userBlogs = userBlogs;
-    }
+    this.userBlogs = userBlogs ?? [];
   }
 
   userLogout() {

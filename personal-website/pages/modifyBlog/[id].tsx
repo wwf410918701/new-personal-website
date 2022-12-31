@@ -262,16 +262,17 @@ const ModifyBlog = () => {
               </div>
             ) : (
               <FileUpload
-                updateFileName={function (fileName: string): void {
-                  if (POSETER_TYPES.includes(fileName.split(".")[1])) {
+                updateFileName={function (fileName: string): void {}}
+                updateFile={function (file: File): void {
+                  const fileType = file.type.split("/")[1];
+
+                  if (POSETER_TYPES.includes(fileType)) {
                     setPosterHasError(false);
-                    setPosterName(fileName);
+                    setPosterName(file.name);
+                    setPosterFile(file);
                   } else {
                     setPosterHasError(true);
                   }
-                }}
-                updateFile={function (file: File): void {
-                  setPosterFile(file);
                 }}
                 hasError={posterHasError}
               />
