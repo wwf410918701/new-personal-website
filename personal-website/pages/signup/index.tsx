@@ -101,7 +101,7 @@ const SignUp = () => {
         visible={successModalVisble}
         onConfirm={function (visible: boolean): void {
           setSuccessModalVisible(visible);
-          Router.push("/login");
+          Router.push("/blogs");
         }}
         onCancel={function (visible: boolean): void {
           setSuccessModalVisible(visible);
@@ -130,7 +130,7 @@ const SignUp = () => {
                           ...preState,
                           userName: true,
                         }));
-                        setEmail(input);
+                        setUserName(input);
                       }
                     }}
                     placeHolder={"User name"}

@@ -71,6 +71,7 @@ const TextEditor = ({
 
   const editorConfig: Partial<IEditorConfig> = {
     placeholder: htmlString,
+    MENU_CONF: {},
   };
 
   // the customized image upload function, because we want to use firestore and the res of firestore is not accord to the requirements of wangEditor
@@ -78,6 +79,11 @@ const TextEditor = ({
     editorConfig.MENU_CONF.uploadImage = {
       // TODO: input modal when inserting new image
       customUpload(file: File, insertFn: InsertFnType) {
+        console.log("fileName in client");
+        console.log(file.name);
+        console.log("file in client");
+        console.log(file);
+
         fetch("/api/upload-image", {
           method: "POST",
           headers: {

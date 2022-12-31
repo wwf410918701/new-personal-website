@@ -83,6 +83,10 @@ export const uploadBlogsImgs = (
 ): Promise<string | null | undefined> => {
   // Upload file and metadata to the object 'images/mountains.jpg'
   const storageRef = stRef(storage, "images/" + filename);
+  console.log("filename");
+  console.log(filename);
+  console.log("file");
+  console.log(file);
   const uploadTask = uploadBytesResumable(
     storageRef,
     file,
