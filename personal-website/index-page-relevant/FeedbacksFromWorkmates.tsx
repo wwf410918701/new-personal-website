@@ -47,9 +47,12 @@ const FeedbacksFromWorkmates = () => (
     </div>
     <div className='flex flex-col items-center justify-center w-full md: md:flex-row gap-x-5'>
       {WORKMATEFEEDBACKS_CONTENT.map((content, index) => (
-        <div className='z-10 mb-5 w-96' key={`workmate_feedback-${index}`}>
+        <div
+          className='z-10 mb-5 md:w-96 w-80'
+          key={`workmate_feedback-${index}`}
+        >
           <Paper>
-            <div className='flex flex-col items-end p-8 h-112 gap-y-2'>
+            <div className='flex flex-col items-end p-8 md:h-112 h-144 gap-y-2'>
               <p className='dark:text-white/80'>{content.paragraph}</p>
               <div className='flex flex-row items-center justify-center'>
                 <p className='mr-2'>{content.name}</p>

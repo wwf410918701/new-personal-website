@@ -178,7 +178,7 @@ const WriteBlogPage = () => {
         className='fixed top-0 z-0 h-screen'
       />
       <div className='z-10 flex flex-col items-center justify-center w-full min-h-screen pt-36'>
-        <div className='z-10 flex flex-col md:w-260 w-96 '>
+        <div className='z-10 flex flex-col md:w-260 w-92 '>
           <div className='z-10 mb-10 '>
             <h2 className='mb-5 text-white'>Title</h2>
             <Input

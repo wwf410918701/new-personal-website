@@ -63,7 +63,7 @@ export default function Home() {
                 workExpInView
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
-              } dark:bg-gray-800 md:w-260 w-100 pt-10 md:mt-5 !mt-24 rounded-2xl`}
+              } dark:bg-gray-800 md:w-260 w-92 pt-10 md:mt-5 !mt-24 rounded-2xl`}
             >
               <section
                 id='WorkExperience'
@@ -80,7 +80,7 @@ export default function Home() {
                 projInView
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
-              } dark:bg-gray-800 md:w-260 w-100 pt-10 !mt-24 pb-16 rounded-2xl`}
+              } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-16 rounded-2xl`}
             >
               <section id='MyProjects' className='snap-start' ref={projExpRef}>
                 <MyProjects />
@@ -93,7 +93,7 @@ export default function Home() {
                 skillsInView
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
-              } dark:bg-gray-800 md:w-260 w-100 pt-10 !mt-24 pb-16 rounded-2xl`}
+              } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-16 rounded-2xl`}
             >
               <section id='SkillsSet' className='snap-start' ref={skillsRef}>
                 <SkillsSet />
@@ -106,7 +106,7 @@ export default function Home() {
                 feedbackInView
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
-              } dark:bg-gray-800 md:w-260 w-100 pt-10 !mt-24 pb-14 rounded-2xl`}
+              } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-14 rounded-2xl`}
             >
               <section id='SkillsSet' className='snap-start' ref={feedbackRef}>
                 <FeedbacksFromWorkmates />
@@ -119,7 +119,7 @@ export default function Home() {
                 hireMeInView
                   ? "fadeIn-animation-loaded"
                   : "fadeIn-animation-preLoad"
-              } dark:bg-gray-800 md:w-260 w-100 pt-10 !mt-24 pb-14 rounded-2xl`}
+              } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-14 rounded-2xl`}
             >
               <section
                 id='FeedbacksFromWorkmates'

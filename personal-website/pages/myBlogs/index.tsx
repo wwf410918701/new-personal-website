@@ -89,7 +89,7 @@ const MyBlogs = observer(() => {
         className='fixed top-0 z-0 h-screen'
       />
       <div className='relative flex flex-col items-center justify-start w-full min-h-screen pt-52 sm:gap-y-5'>
-        <div className='absolute pb-10 sm:w-112 md:w-144 xl:w-260 top-32 w-96'>
+        <div className='absolute pb-10 sm:w-112 md:w-144 xl:w-260 top-32 w-92'>
           <div className='flex flex-row items-center justify-center w-full'>
             <div className='w-full border-b border-gray-200 dark:border-gray-600' />
             <h2 className='w-full text-center text-white'>Your Posts</h2>

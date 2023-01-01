@@ -125,11 +125,11 @@ const HireMe = () => {
         </div>
       </div>
       <div className='z-10 flex flex-col items-center justify-center md:flex-row gap-x-10'>
-        <div className='w-96 h-96 md:h-128'>
+        <div className='md:w-96 w-80 h-96 md:h-128'>
           <GoogleMap />
         </div>
         <div className='mt-5 md:mt-12'>
-          <div className='flex flex-col items-start mb-6 w-96 md:h-128 h-80 gap-y-5'>
+          <div className='flex flex-col items-start mb-6 w-80 md:w-96 md:h-128 h-80 gap-y-5'>
             <Input
               onUpdate={function (inputString: string): void {
                 setTouched((preState) => ({

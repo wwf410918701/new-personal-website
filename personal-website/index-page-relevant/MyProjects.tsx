@@ -65,7 +65,7 @@ const MyProjects = () => (
           {content.map((c) => (
             <div
               key={c.des[0]}
-              className='pl-2 pr-2 mb-10 w-100 h-60 md:mr-10 md:mb-0 last:mb-0 last:mr-0 md:pl-0 md:pr-0 '
+              className='pl-2 pr-2 mb-10 md:w-100 md:h-60 md:mr-10 md:mb-0 last:mb-0 last:mr-0 md:pl-0 md:pr-0 '
             >
               <ImageBoxWithDescription
                 title={c.des[0]}

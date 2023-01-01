@@ -36,7 +36,7 @@ const SkillsSet = () => (
         className='z-10 flex justify-center w-full mb-5 last:mb-0'
       >
         <div className='flex flex-col md:flex-row'>
-          <div className='mb-5 w-96 md:mr-5 md:mb-0'>
+          <div className='mb-5 w-80 md:mr-5 md:mb-0'>
             <Paper>
               <svg
                 className='w-6 h-6 ml-2 mr-2 dark:text-green-500'
@@ -55,7 +55,7 @@ const SkillsSet = () => (
               <h3>{content[0]}</h3>
             </Paper>
           </div>
-          <div className='w-96'>
+          <div className='w-80'>
             <Paper>
               <svg
                 className='w-6 h-6 ml-2 mr-2 dark:text-green-500'
