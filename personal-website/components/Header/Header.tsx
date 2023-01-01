@@ -4,7 +4,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../pages/_app";
 import { useRouter } from "next/router";
-import { LoginResData } from "../../mobx/helper";
 import { auth } from "../../firebase/config";
 import { fetchUserInfo, storeUser } from "../../firebase/usersRelevantApis";
 import moment from "moment";
@@ -190,18 +189,8 @@ const Header = observer(() => {
                         }
                         onClick={(e) => {
                           e.preventDefault();
-                          fetch("/api/sign-out")
-                            .then((response) => {
-                              if (response.status === 200) {
-                                userStore.userLogout();
-                              } else {
-                                console.log("Fail to log out users");
-                              }
-                            })
-                            .catch((e) => {
-                              console.log("Error when sign out users");
-                              console.log(e);
-                            });
+                          auth.signOut();
+                          userStore.userLogout();
                         }}
                       >
                         {"Sign Out"}
