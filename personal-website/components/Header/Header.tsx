@@ -203,14 +203,14 @@ const Header = observer(() => {
                       <HeaderInButton
                         text={"Login"}
                         link={"/login"}
-                        selected={false}
+                        selected={asPath === "/login"}
                       />
                     </li>
                     <li>
                       <HeaderInButton
                         text={"Signup"}
                         link={"/signup"}
-                        selected={false}
+                        selected={asPath === "/signup"}
                       />
                     </li>
                   </>
