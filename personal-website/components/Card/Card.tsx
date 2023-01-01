@@ -17,6 +17,7 @@ const Card = ({ posterUrl, title, des, linkPageUrl }: ICard) => (
       className='object-cover rounded-t-lg h-96 md:h-full md:w-48 w-96 md:rounded-none md:rounded-l-lg'
       width={48}
       height={96}
+      quality={85}
       src={posterUrl}
       alt={title}
     />
