@@ -6,7 +6,8 @@ import Input from "../Input";
 import { createComment } from "../../firebase/blogApisWithoutType";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "../../pages/_app";
-
+import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 interface IComments {
   blogId: string;
 }
@@ -14,7 +15,7 @@ interface IComments {
 const Comments = observer(({ blogId }: IComments) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentInputHasError, setCommentInputHasError] = useState(false);
-  const [commpentInput, setCommpentInput] = useState("");
+  const [commentInput, setCommentInput] = useState("");
   const { userStore } = useContext(RootStoreContext);
 
   useEffect(() => {
@@ -26,13 +27,24 @@ const Comments = observer(({ blogId }: IComments) => {
   }, []);
 
   const handleSubmit = () => {
-    if (commpentInput.trim().length != 0) {
+    if (commentInput.trim().length != 0) {
       createComment(
         blogId,
-        commpentInput,
+        commentInput,
         userStore.userName,
         userStore.userID
-      );
+      ).then(() => {
+        setComments((preComments) => [
+          ...preComments,
+          {
+            commentID: uuidv4(),
+            content: commentInput,
+            createAt: moment().format("DD/MM/YYYY"),
+            displayName: userStore.userName ?? "",
+            uid: userStore.userID ?? "",
+          },
+        ]);
+      });
     } else {
       setCommentInputHasError(true);
     }
@@ -44,7 +56,7 @@ const Comments = observer(({ blogId }: IComments) => {
         <Input
           onUpdate={function (inputString: string): void {
             setCommentInputHasError(false);
-            setCommpentInput(inputString);
+            setCommentInput(inputString);
           }}
           placeHolder={"Share your ideas here.."}
           type={""}
