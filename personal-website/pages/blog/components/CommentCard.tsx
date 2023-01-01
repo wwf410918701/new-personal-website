@@ -8,7 +8,7 @@ interface ICommentCard {
 
 const CommentCard = ({ comment, author, createAt }: ICommentCard) => (
   <Paper>
-    <div className='flex flex-col items-center justify-center p-2 break-all gap-y-3 dark:text-white sm:w-112 md:w-224 w-80'>
+    <div className='flex flex-col items-start justify-center w-full p-5 break-all gap-y-3 dark:text-white sm:w-112 md:w-224'>
       <p>{comment}</p>
       <div className='flex flex-col items-center justify-end w-full md:flex-row'>
         <div>

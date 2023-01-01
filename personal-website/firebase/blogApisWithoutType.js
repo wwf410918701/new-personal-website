@@ -197,3 +197,42 @@ const deletePostBelongingOnUserAccount = (postID, userID) => {
   .then(userBlogs => userBlogs.filter(userBlog => userBlog !== postID))
   .then(updatedUserBlog => userRef.update('blogs', updatedUserBlog))
 }
+
+export const createComment = (blogID, content, displayName, uid) => {
+  const postRef = firestore.doc(`posts/${blogID}`)
+  const createAt = new moment().format("DD/MM/YYYY") 
+
+  return postRef.get().then(postRes => postRes.data())
+  .then(post => post.comments)
+  .then(preComments => {
+    let latestID = 0;
+
+    if (preComments.length !== 0) {
+      latestID = preComments.map(preComment => preComment.commentID).sort((a, b) => {
+        if (a > b) {
+          return -1;
+        }
+        if (b > a) {
+          return 1;
+        }
+        return 0;
+      })[0]
+    }
+
+    return{
+      latestCommentID: latestID + 1,
+      preComments,
+    }
+  })
+  .then(preCommentsData => {
+    const addedCommentsArray = [...preCommentsData.preComments, {
+      commentID: preCommentsData.latestCommentID,
+      content, 
+      displayName, 
+      createAt, 
+      uid,
+    }]
+    postRef.update('comments', addedCommentsArray)
+    return addedCommentsArray
+  })
+}

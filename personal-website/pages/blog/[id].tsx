@@ -3,9 +3,13 @@ import Header from "../../components/Header";
 import { fetchAllPostsSummaries, fetchPost } from "../../firebase/blogApis";
 import { Blog } from "../../firebase/type";
 import CommentCard from "./components/CommentCard";
+const Comments = dynamic(import("../../components/Comments"), {
+  ssr: false,
+});
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 interface IBlog {
   blog: Blog | null;
 }
@@ -47,20 +51,13 @@ const Blog = ({ blog }: IBlog) => (
               className='break-all overflow-clip sm:w-112 md:w-224 w-80'
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
-            <div className='sm:w-112 md:w-224 w-96 overflow-clip '>
-              <div className='flex flex-row items-center justify-center w-full'>
+            <div className='sm:w-112 md:w-224 w-96 overflow-clip'>
+              <div className='flex flex-row items-center justify-center w-full mb-3'>
                 <div className='w-full border-b border-gray-200 dark:border-gray-600' />
                 <h2 className='w-full text-center'>Comments</h2>
                 <div className='w-full border-b border-gray-200 dark:border-gray-600' />
               </div>
-              {blog.comments.map((comment) => (
-                <CommentCard
-                  key={comment.commentID}
-                  comment={comment.content}
-                  author={comment.displayName}
-                  createAt={comment.createAt}
-                />
-              ))}
+              <Comments blogId={blog.id} />
             </div>
           </>
         ) : (
