@@ -236,3 +236,41 @@ export const createComment = (blogID, content, displayName, uid) => {
     return addedCommentsArray
   })
 }
+
+export const updateComment = (blogID, commentID, content, displayName, uid) => {
+  const postRef = firestore.doc(`posts/${blogID}`)
+  const createAt = new Date()
+
+  return postRef.get().then(postRes => postRes.data())
+  .then(post => post.comments)
+  .then(preComments => postRef.update('comments', preComments.map(preComment => {
+    if(commentID === preComment.commentID) {
+      return {
+        commentID: parseInt(commentID),
+        content, 
+        displayName, 
+        createAt, 
+        uid,
+      }
+    }
+    return preComment
+  }))
+  )
+  .then(() => ({
+    commentID: parseInt(commentID),
+    content, 
+    displayName, 
+    createAt, 
+    uid,
+  }))
+}
+
+export const deleteComment = (blogID, commentID) => {
+  const postRef = firestore.doc(`posts/${blogID}`)
+
+  return postRef.get().then(postRes => postRes.data())
+  .then(post => post.comments)
+  .then(preComments => {
+    postRef.update('comments', preComments.filter(preComment => preComment.commentID !== commentID))
+  })
+}

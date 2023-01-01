@@ -57,7 +57,9 @@ const Blog = ({ blog }: IBlog) => (
                 <h2 className='w-full text-center'>Comments</h2>
                 <div className='w-full border-b border-gray-200 dark:border-gray-600' />
               </div>
-              <Comments blogId={blog.id} />
+              <div className='w-full p-2'>
+                <Comments blogId={blog.id} />
+              </div>
             </div>
           </>
         ) : (

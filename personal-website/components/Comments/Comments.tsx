@@ -76,9 +76,12 @@ const Comments = observer(({ blogId }: IComments) => {
         {comments.map((comment) => (
           <CommentCard
             key={comment.commentID}
+            blogId={blogId}
             comment={comment.content}
+            commentId={comment.commentID}
             author={comment.displayName}
             createAt={comment.createAt}
+            commentBelogerId={comment.uid}
           />
         ))}
       </div>
