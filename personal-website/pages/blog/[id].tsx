@@ -2,7 +2,6 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { fetchAllPostsSummaries, fetchPost } from "../../firebase/blogApis";
 import { Blog } from "../../firebase/type";
-import CommentCard from "./components/CommentCard";
 const Comments = dynamic(import("../../components/Comments"), {
   ssr: false,
 });
@@ -27,10 +26,10 @@ const Blog = ({ blog }: IBlog) => (
       className='fixed top-0 z-0 h-screen'
     />
     <div className='z-10 flex flex-col items-center justify-center w-full pt-36 gap-y-10 dark:text-white'>
-      <div className='z-10 flex flex-col items-center justify-between min-h-screen p-0 pt-10 pb-10 bg-gray-800 opacity-80 sm:p-20 rounded-xl gap-y-10'>
+      <div className='z-10 flex flex-col items-center justify-between min-h-screen p-5 pt-10 pb-10 bg-gray-800 opacity-80 sm:p-20 rounded-xl gap-y-10'>
         {blog ? (
           <>
-            <div className='flex flex-col items-center justify-center gap-y-5'>
+            <div className='flex flex-col items-center justify-center gap-y-5 sm:w-112 md:w-224 w-80'>
               <h1 className='text-center'>{blog?.title}</h1>
               <div className='flex flex-row justify-between w-80'>
                 <p>
@@ -51,7 +50,7 @@ const Blog = ({ blog }: IBlog) => (
               className='break-all overflow-clip sm:w-112 md:w-224 w-80'
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
-            <div className='sm:w-112 md:w-224 w-96 overflow-clip'>
+            <div className='sm:w-112 md:w-224 w-80 overflow-clip'>
               <div className='flex flex-row items-center justify-center w-full mb-3'>
                 <div className='w-full border-b border-gray-200 dark:border-gray-600' />
                 <h2 className='w-full text-center'>Comments</h2>

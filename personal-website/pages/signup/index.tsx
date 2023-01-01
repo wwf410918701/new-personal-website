@@ -108,7 +108,7 @@ const SignUp = () => {
         }}
       />
       <div className='flex items-center justify-center w-full h-screen'>
-        <div className='z-10 flex items-center justify-center md:w-128 w-96 opacity-90'>
+        <div className='z-10 flex items-center justify-center md:w-128 w-92 opacity-90'>
           <Paper>
             <div className='flex items-center justify-center w-full pt-10 pb-10'>
               <form className='flex flex-col justify-center md:w-96 w-80'>
