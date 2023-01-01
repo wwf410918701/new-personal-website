@@ -12,7 +12,7 @@ import LoadingButton from "../../components/LoadingButton";
 import { UploadingStatus } from "../../firebase/type";
 import FileUpload from "../../components/FileUpload";
 import { RootStoreContext } from "../_app";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { uploadImg, storePost } from "../../firebase/blogApisWithoutType";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
@@ -164,7 +164,7 @@ const WriteBlogPage = () => {
       <Header />
       <ConfirmModal
         type='error'
-        message='Errors happen when uploading image, please try again'
+        message='Are you sure to give up modification?'
         visible={cancelConfirmModalVisible}
         onConfirm={() => {
           setCancelConfirmModalVisible(false);
