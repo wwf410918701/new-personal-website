@@ -41,7 +41,7 @@ const paragraphInputHasError = (paragraph: string) => {
   return false;
 };
 
-const POSETER_TYPES = ["png", "jpg", "svg"];
+const POSETER_TYPES = ["png", "jpg", "svg", "jpeg", "svg+xml"];
 
 const ModifyBlog = () => {
   const [title, setTitle] = useState("");

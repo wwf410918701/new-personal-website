@@ -41,7 +41,7 @@ const paragraphInputHasError = (paragraph: string) => {
   return false;
 };
 
-const POSETER_TYPES = ["png", "jpg", "svg"];
+const POSETER_TYPES = ["png", "jpg", "svg", "jpeg", "svg+xml"];
 
 const WriteBlogPage = () => {
   const [title, setTitle] = useState("");
@@ -225,7 +225,6 @@ const WriteBlogPage = () => {
               updateFileName={function (fileName: string): void {}}
               updateFile={function (file: File): void {
                 const fileType = file.type.split("/")[1];
-
                 if (POSETER_TYPES.includes(fileType)) {
                   setPosterHasError(false);
                   setPosterName(file.name);
