@@ -79,11 +79,6 @@ const TextEditor = ({
     editorConfig.MENU_CONF.uploadImage = {
       // TODO: input modal when inserting new image
       customUpload(file: File, insertFn: InsertFnType) {
-        console.log("fileName in client");
-        console.log(file.name);
-        console.log("file in client");
-        console.log(file);
-
         uploadBlogsImgs(file.name, file)
           .then((backwardUrl) => {
             if (backwardUrl) {
