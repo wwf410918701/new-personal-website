@@ -40,9 +40,7 @@ export default function Home() {
         <title>About me</title>
         <meta
           name='description'
-          content="Hi, I'm Jimmy, a frontend developer.
-          I have one and a half year experience in frontend development and looking for full time opportunity of June next year after my graduation.
-          I am now a student of unimelb, majoring in master of IT and working as part time frontend developer in SPARK RELIEF TEACHERS. I previously worked as frontend developer intern in Sensetime, which is the top one Chinese AI company. Besides, I also worked in P&G China as Software Engineer intern. Building apps is both my job and interests."
+          content='Software / Frontend / React / NextJS / Javascript Engineer with one year experience looking for full time opportunity of June next year after graduation.'
           key='desc'
         />
       </Head>

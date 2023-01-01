@@ -13,9 +13,8 @@ const PersonalIntro = () => (
           </span>
         </h1>
         <h2 className='text-gray-200 dark:'>
-          I have one and a half year experience in frontend development and
-          looking for full time opportunity of June next year after my
-          graduation.
+          I have one year experience in frontend development and looking for
+          full time opportunity of June next year after my graduation.
         </h2>
         <p className=' dark:text-white/50'>
           I am now a student of unimelb, majoring in master of IT and working as
