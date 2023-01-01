@@ -145,7 +145,7 @@ const ModifyBlog = () => {
         summary,
         paragraph,
         userStore.userName,
-        null,
+        posterUrl,
         userStore.userID
       )
         .then(async () => {
