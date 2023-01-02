@@ -13,6 +13,7 @@ import { RootStoreContext } from "../_app";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import PrivateRoute from "../../components/PrivateRoute";
 
 interface IMyBlogs {
   summaries: Summary[];
@@ -175,4 +176,10 @@ const MyBlogs = observer(() => {
   );
 });
 
-export default MyBlogs;
+const ProtectedMyBlogs = () => (
+  <PrivateRoute>
+    <MyBlogs />
+  </PrivateRoute>
+);
+
+export default ProtectedMyBlogs;

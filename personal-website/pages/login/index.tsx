@@ -12,6 +12,7 @@ import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
 import { auth } from "../../firebase/config";
+import RestrictedRoute from "../../components/RestrictedRoute";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -190,4 +191,10 @@ const Login = () => {
   );
 };
 
-export default Login;
+const RestrictedLogin = () => (
+  <RestrictedRoute>
+    <Login />
+  </RestrictedRoute>
+);
+
+export default RestrictedLogin;

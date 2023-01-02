@@ -18,7 +18,7 @@ const WORKMATEFEEDBACKS_CONTENT: WorkmateFeedback[] = [
   },
   {
     paragraph:
-      "I would say WeiFeng is a reliable workmate, he didn't afraid to overcome challenges and can delivery complicated features on time and in high quality.",
+      "WeiFeng worked under my guidance for four months, I would say WeiFeng is a colleague that I can count on, he didn't afraid to overcome challenges and can delivery complicated features on time and in high quality.",
     name: "Liang Yu",
     position: "Senior fullstack developer, Sensetime",
   },

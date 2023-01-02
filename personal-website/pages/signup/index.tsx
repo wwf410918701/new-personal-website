@@ -8,6 +8,7 @@ import ConfirmModal from "../../components/ConfirmModal";
 import backgroundImg from "../../public/images/public/background-img.jpg";
 import Image from "next/image";
 import Head from "next/head";
+import RestrictedRoute from "../../components/RestrictedRoute";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -265,4 +266,10 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const RestrictedSignup = () => (
+  <RestrictedRoute>
+    <SignUp />
+  </RestrictedRoute>
+);
+
+export default RestrictedSignup;

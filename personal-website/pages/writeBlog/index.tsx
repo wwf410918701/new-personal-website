@@ -19,6 +19,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmModal from "../../components/ConfirmModal";
+import PrivateRoute from "../../components/PrivateRoute";
 
 const summaryInputHasError = (Summary: string) => {
   if (Summary.trim().length === 0) {
@@ -278,4 +279,10 @@ const WriteBlogPage = () => {
   );
 };
 
-export default WriteBlogPage;
+const protectedWriteBlogPage = () => (
+  <PrivateRoute>
+    <WriteBlogPage />
+  </PrivateRoute>
+);
+
+export default protectedWriteBlogPage;
