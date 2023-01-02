@@ -47,7 +47,7 @@ const Blog = ({ blog }: IBlog) => (
               </div>
             </div>
             <div
-              className='break-all overflow-clip sm:w-112 md:w-224 w-80'
+              className='break-words overflow-clip sm:w-112 md:w-224 w-80'
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
             <div className='sm:w-112 md:w-224 w-80 overflow-clip'>
