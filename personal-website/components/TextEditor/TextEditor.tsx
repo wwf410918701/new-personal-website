@@ -65,7 +65,7 @@ const TextEditor = ({
       "group-video",
       "insertImage",
       "group-more-style",
-      "codeBlock",
+      // "codeBlock",
     ],
   };
 

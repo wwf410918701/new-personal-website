@@ -66,3 +66,29 @@ a{
   opacity: 0.8;
 }
 
+code {
+  word-wrap: normal;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  line-height: 1.5;
+  margin: 0.5em 0;
+  overflow: auto;
+  padding: 1em;
+  tab-size: 4;
+  text-align: left;
+  text-shadow: 0 1px #fff;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+
+  background-color: #434548;
+  border: 1px solid rgb(163, 157, 157);
+  border-radius: 4px 4px;
+  display: block;
+  font-size: 14px;
+  padding: 10px;
+  text-indent: 0;
+}
+
