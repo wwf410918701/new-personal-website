@@ -56,7 +56,7 @@ const MyProjects = () => (
       </svg>
       <h2 className='mb-10 font-semibold dark:text-white'>My Projects</h2>
     </div>
-    <div>
+    <div id='myProjects'>
       {MY_PROJECT_CONTENT.map((content, index) => (
         <div
           key={`project-${index}`}

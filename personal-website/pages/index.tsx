@@ -66,7 +66,7 @@ export default function Home() {
               } dark:bg-gray-800 md:w-260 w-92 pt-10 md:mt-5 !mt-24 rounded-2xl`}
             >
               <section
-                id='WorkExperience'
+                id='workExperience'
                 className='snap-start'
                 ref={workExpRef}
               >
@@ -82,7 +82,7 @@ export default function Home() {
                   : "fadeIn-animation-preLoad"
               } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-16 rounded-2xl`}
             >
-              <section id='MyProjects' className='snap-start' ref={projExpRef}>
+              <section className='snap-start' ref={projExpRef}>
                 <MyProjects />
               </section>
             </div>
@@ -121,11 +121,7 @@ export default function Home() {
                   : "fadeIn-animation-preLoad"
               } dark:bg-gray-800 md:w-260 w-92 pt-10 !mt-24 pb-14 rounded-2xl`}
             >
-              <section
-                id='FeedbacksFromWorkmates'
-                className='snap-start'
-                ref={hireMeRef}
-              >
+              <section className='snap-start' ref={hireMeRef}>
                 <HireMe />
               </section>
             </div>
